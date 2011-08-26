@@ -10,6 +10,7 @@
 	require_once("inc/functions.php");
 	require_once("inc/const.php");
     require_once("inc/Rest.php");
+    //require_once("inc/XmlWriter.php"); // removed because it wasn't working
 
     $data = RestUtils::processRequest();
 

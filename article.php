@@ -48,6 +48,23 @@
                 );
 
                 RestUtils::sendResponse(200, json_encode($article), 'application/json');
+                /*
+                Code to output XML as well as JSON
+                if($data->getHttpAccept() == 'json')
+                {
+                    RestUtils::sendResponse(200, json_encode($article), 'application/json');
+                }
+                else if ($data->getHttpAccept() == 'xml')
+                {
+                    $xml = new MakeXml();
+                    $xml->push('article');
+                    foreach ($article as $key => $value) {
+                        $xml->element($key, $value);
+                    }
+                    $xml->pop();
+
+                    RestUtils::sendResponse(200, $xml->getXml(), 'application/xml');
+                }*/
             }
             break;
         // new user create
