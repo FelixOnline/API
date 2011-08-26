@@ -3,6 +3,7 @@
 // Simon Willison, 16th April 2003
 // Based on Lars Marius Garshol's Python XMLWriter class
 // See <a class="linkclass" href="http://www.xml.com/pub/a/2003/04/09/py-xml.html">http://www.xml.com/pub/a/2003/04/09/py-xml.html</a>
+// http://80.68.89.23/2003/Apr/29/xmlWriter/
 
 class MakeXml { // Renamed from XmlWriter to MakeXml because php doesn't like it
     var $xml;
