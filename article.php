@@ -42,26 +42,12 @@
 				    'article_category_display' => get_article_category($id),
 				    'article_date' => get_article_publishdate($id),
                     'article_image' => '',
-				    'article_content' => "<![CDATA[".clean_content2(get_article_text(($id)))."]]>",
+				    'article_content' => clean_content2(get_article_text(($id))),
 			        'article_url' => STANDARD_URL.article_url($id),
 				    'article_comments' => '',
                 );
 
-                if($data->getHttpAccept() == 'json')
-                {
-                    RestUtils::sendResponse(200, json_encode($article), 'application/json');
-                }
-                else if ($data->getHttpAccept() == 'xml')
-                {
-                    $xml = new MakeXml();
-                    $xml->push('article');
-                    foreach ($article as $key => $value) {
-                        $xml->element($key, $value);
-                    }
-                    $xml->pop();
-
-                    RestUtils::sendResponse(200, $xml->getXml(), 'application/xml');
-                }
+                RestUtils::sendResponse(200, json_encode($article), 'application/json');
             }
             break;
         // new user create

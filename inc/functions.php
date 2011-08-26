@@ -21,6 +21,13 @@ function gen_random_string() {
     return $string;
 }
 
+/* Check api key */
+function check_key($key) {
+	global $dbok,$cid;
+    $sql = "SELECT * FROM `api_keys` WHERE api_key='".$key."'";
+    return mysql_num_rows(mysql_query($sql, $cid));
+}
+
 /* ---------------------------------------------------------- */
 /* END of general functions */
 /* ---------------------------------------------------------- */
