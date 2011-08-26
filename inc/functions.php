@@ -1,23 +1,20 @@
 <?php
-	
-/* 
+
+/*
 	API functions
-	
 	Author: Jonathan Kim
-	
 	Date: 04/06/2011
-	
 */
 
 /* ---------------------------------------------------------- */
 /* General api functions */
 /* ---------------------------------------------------------- */
 
-/* Generate random api key */	
+/* Generate random api key */
 function gen_random_string() {
     $length = 20;
     $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-    $string = '';    
+    $string = '';
     for ($p = 0; $p < $length; $p++) {
         $string .= $characters[mt_rand(0, strlen($characters))];
     }
@@ -33,7 +30,7 @@ function gen_random_string() {
 /* ---------------------------------------------------------- */
 
 /* Get article title from id */
-function get_article_title($id) { 
+function get_article_title($id) {
 	global $dbok,$cid;
 	if ($dbok) {
 		$sql = "SELECT title FROM `article` WHERE id=$id";
@@ -42,7 +39,7 @@ function get_article_title($id) {
 }
 
 /* Get short article title from id. If no short article title then return full title */
-function get_short_article_title($id) { 
+function get_short_article_title($id) {
 	global $dbok,$cid;
 	if ($dbok) {
 		$sql = "SELECT short_title FROM `article` WHERE id=$id";
@@ -54,7 +51,7 @@ function get_short_article_title($id) {
 }
 
 /* Get article teaser from id */
-function get_article_teaser($id) { 
+function get_article_teaser($id) {
 	global $cid;
 	$sql = "SELECT teaser,content AS text1 FROM `article` INNER JOIN `text_story` ON (article.text1=text_story.id) WHERE article.id=$id";
 	list($teaser,$content) = mysql_fetch_array(mysql_query($sql,$cid));
@@ -126,11 +123,11 @@ function clean_content2($text) {
 function article_url($article) {
 	$cat = get_article_category_cat($article);
 	$title = get_article_title($article);
-	
+
 	$title = strtolower($title); // Make title lowercase
 	$title= preg_replace('/[^\w\d_ -]/si', '', $title); // Remove special characters
 	$dashed = str_replace( " ", "-", $title); // Replace spaces with hypens
-	
+
 	$output = $cat.'/'.$article.'/'.$dashed.'/';
 	return $output;
 }
