@@ -1,0 +1,109 @@
+/* Import elements.less for useful mixins */
+@import "elements.less";
+
+/* Import bootstrap */
+@import "bootstrap.less";
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Also: hot pink! (or customize the background color to match your design)
+ */
+
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+/* ==|== primary styles =====================================================
+   Author: J.Kim
+   ========================================================================== */
+
+h1, h2, h3, h4 {
+    font-weight: normal; // Default to none bold
+}
+
+header {
+    margin-top: 50px;
+    height: 130px;
+    padding-top: 30px;
+
+    h1 {
+        text-align: center;
+        font-weight: normal;
+        font-size: 40px;
+    }
+
+    p {
+        text-align: center;
+        font-size: 18px;
+    }
+}
+
+#api_key {
+
+    .page-header {
+        margin-bottom: 0px;
+    }
+
+    form {
+        p {
+            margin-bottom: 0px;
+            margin-top: 5px;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        .actions {
+            margin-top: 0px;
+            background: #fff;
+            border-top: none;
+        }
+    }
+}
+
+#contents {
+    dl { 
+        dt {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 24px;
+
+            a {
+                color: #444;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==|== media queries ======================================================
+   PLACEHOLDER Media Queries for Responsive Design.
+   These override the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+
+}
+
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+
+}
+
+
