@@ -1,0 +1,3 @@
+# Contact Us
+
+The API documentation is maintained by Jonathan Kim. You can find me on [twitter](http://twitter.com/#!/jonnykim) or by emailing me at <jkimbo@gmail.com>

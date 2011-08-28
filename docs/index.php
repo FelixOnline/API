@@ -43,6 +43,10 @@
 
 <body>
 
+    <?php
+        // section files
+        $sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
+    ?>
     <div class="topbar">
         <div class="fill">
             <div class="container">
@@ -50,7 +54,16 @@
                 <ul>
                     <li class="active"><a href="#overiew">Overview</a></li>
                     <li><a href="#api_key">Api Keys</a></li>
-                    <li><a href="#contents">Contents</a></li>
+                    <ul class="nav">
+                        <li class="menu">
+                            <a href="#contents" class="menu">Contents</a>
+                            <ul class="menu-dropdown">
+                                <?php foreach($sections as $section) { ?>
+                                    <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    </ul>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -63,18 +76,10 @@
             <p>Make yourself at home. If you have any questions then please do <a href="#contact">contact us</a>.</p>
         </header>
         <section id="overview">
-            <div class="page-header">
-                <h1>Overview</h1>
-            </div>
-            <p>This is the documentation for Felix Online API. It is a work in progress at the moment so please bear with us. Any features that are working will be clearly marked as such, as well as any that aren't!</p>
-            <p>N.B. We only support JSON output format at the moment.</p>
-            <div class="row">
-            </div>
+            <?php require_once('sections/overview.html'); ?>
         </section>
         <section id="api_key">
-            <div class="page-header">
-                <h1>Get an API key</h1>
-            </div>
+            <h1>Get an API key</h1>
             <div class="row">
                 <div class="span16">
                     <form id="api_key_form">
@@ -100,34 +105,21 @@
             </div>
         </section>
         <section id="contents">
-            <div class="page-header">
-                <h1>Contents</h1>
-            </div>
-            <div class="row">
-                <div class="span6 offset3">
-                    <dl>
-                        <dt><a href="#article">Article</a></dt>
-                        <dd>The article api</dd>
-                        <dt><a href="#images">Images</a></dt>
-                        <dd>Image api</dd>
-                    </dl>
-                </div>
-            </div>
+            <h1>Contents</h1>
+            <ul>
+            <?php foreach($sections as $section) { ?>
+                <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
+            <?php } ?>
+            </ul>
         </section>
-        <section id="article">
-            <div class="page-header">
-                <h1>Article <small>Access to all the articles on Felix Online</small></h1>
-            </div>
-
+        <?php foreach($sections as $key=> $section) { ?>
+        <section id="<?php echo $section; ?>">
+            <?php require_once('sections/'.$section.'.html'); ?>
         </section>
+        <?php } ?>
         <section id="contact">
-            <div class="page-header">
-                <h1>Contact</h1>
-            </div>
+            <?php require_once('sections/contact.html'); ?>
         </section>
-        <div id="main" role="main">
-
-        </div>
         <footer>
             <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
         </footer>
@@ -142,6 +134,8 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/plugins.js"></script>
+  <script defer src="js/mylibs/jquery.scrollTo-1.4.2-min.js"></script>
+  <script defer src="js/mylibs/jquery.localscroll-1.2.7-min.js"></script>
   <script defer src="js/script.js"></script>
   <!-- end scripts-->
 
