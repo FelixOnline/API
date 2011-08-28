@@ -29,7 +29,9 @@ Ariticle url on Felix Online
 Link to article comments api reference
 
 ## Example Call: 
-    http://api.felixonline.co.uk/?key=API_KEY&what=article&id=1338
+<pre>
+    <code>http://api.felixonline.co.uk/?key=<?php echo get_api_key(); ?>&what=article&id=1338</code>
+</pre>
 ## Example Output:
     {
         article_title: "Nature of Man"

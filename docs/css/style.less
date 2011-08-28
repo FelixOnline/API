@@ -22,19 +22,24 @@ h1, h2, h3, h4 {
 }
 
 header {
-    margin-top: 50px;
+    margin-top: 40px;
     height: 130px;
     padding-top: 30px;
+    background:#333;
+    @shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
+    .box-shadow(@shadow);
 
     h1 {
         text-align: center;
         font-weight: normal;
         font-size: 40px;
+        color: #fff;
     }
 
     p {
         text-align: center;
         font-size: 18px;
+        color: #D3D3D3;
     }
 }
 

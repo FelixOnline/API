@@ -28,6 +28,41 @@ function check_key($key) {
     return mysql_num_rows(mysql_query($sql, $cid));
 }
 
+function is_logged_in() { // returns active user or false
+    if ($_SESSION['felix']['loggedin'])
+        return $_SESSION['felix']['uname'];
+    else
+        return false;
+}
+
+function get_vname() {
+    return $_SESSION['felix']['vname'];
+}
+
+function user_has_key($uname) {
+    global $dbok,$cid;
+    $sql = "SELECT api_key FROM `api_keys` WHERE user='".$uname."'";
+    if (mysql_num_rows(mysql_query($sql, $cid))) {
+		return mysql_result(mysql_query($sql,$cid),0);
+    } else {
+       return false;
+    };
+}
+
+/* For use in example calls.
+ * If user is logged in and has a key then return that key. Else return 'API_KEY'.
+ */
+function get_api_key() {
+    global $dbok,$cid;
+    $uname = is_logged_in();
+    $sql = "SELECT api_key FROM `api_keys` WHERE user='".$uname."'";
+    if (mysql_num_rows(mysql_query($sql, $cid))) {
+		return mysql_result(mysql_query($sql,$cid),0);
+    } else {
+       return 'API_KEY';
+    };
+}
+
 /* ---------------------------------------------------------- */
 /* END of general functions */
 /* ---------------------------------------------------------- */

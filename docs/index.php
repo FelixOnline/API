@@ -44,15 +44,23 @@
 <body>
 
     <?php
+        require_once("../inc/config.inc.php");
+	    require_once("../inc/functions.php");
+	    require_once("../inc/const.php");
+        require_once("../authentication.php");
+    ?>
+
+    <?php
         // section files
         $sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
+        global $key;
     ?>
     <div class="topbar">
         <div class="fill">
             <div class="container">
                 <h3><a href="#">Felix Online API Docs</a></h3>
                 <ul>
-                    <li class="active"><a href="#overiew">Overview</a></li>
+                    <li class="active"><a href="#overview">Overview</a></li>
                     <li><a href="#api_key">Api Keys</a></li>
                     <ul class="nav">
                         <li class="menu">
@@ -66,43 +74,92 @@
                     </ul>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <?php if(is_logged_in()) { ?>
+                <ul class="nav secondary-nav">
+                    <li class="menu">
+                        <a href="#" class="menu"><?php echo get_vname();?></a>
+                        <ul class="menu-dropdown">
+                            <li class="clearfix">
+                                <form method="post" style="display: inline;">
+                                    <input type="submit" value="Logout" id="logoutbutton" name="logout">
+                                </form>
+                            </li>
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+                <?php } ?>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div id="header_cont">
         <header>
             <h1>Welcome to the Felix Online API Documentation</h1>
             <p>Make yourself at home. If you have any questions then please do <a href="#contact">contact us</a>.</p>
         </header>
+    </div>
+    <div class="container">
         <section id="overview">
-            <?php require_once('sections/overview.html'); ?>
+            <?php require_once('sections/overview.php'); ?>
         </section>
         <section id="api_key">
             <h1>Get an API key</h1>
-            <div class="row">
-                <div class="span16">
-                    <form id="api_key_form">
-                        <fieldset>
-                            <div class="clearfix">
-                                <label for="name">Name:</label>
-                                <div class="input">
-                                    <p>Jonathan Kim</p>
+            <?php if(!($uname = is_logged_in())) { // user is not logged in ?>
+                <h4>You need to be logged in to request an API key</h4>
+                <form action="" method="post">
+                    <fieldset>
+                        <div class="clearfix">
+                            <label for="username">IC Username</label>
+                            <div class="input">
+                                <input type="text" class="xlarge" name="username" id="username" size="30" />
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <label for="password">IC Password</label>
+                            <div class="input">
+                                <input type="password" class="xlarge" name="password" id="password" size="30" />
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <label for="rememberButton">Remember Me</label>
+                            <div class="input">
+                                <input type="checkbox" name="remember" id="rememberButton" value="rememberme" />
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <input type="submit" value="Login &raquo;" name="login" id="submit" class="btn primary large"/>
+                        </div>
+                    </fieldset>
+                </form>
+            <?php } else if(!user_has_key($uname)) { // user is logged in but doesn't have a key ?>
+                <div class="row">
+                    <div class="span16">
+                        <form id="api_key_form">
+                            <fieldset>
+                                <div class="clearfix">
+                                    <label for="name">Name:</label>
+                                    <div class="input">
+                                        <p><?php echo get_vname();?></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="clearfix">
-                                <label for="desc">What do you want the key for?</label>
-                                <div class="input">
-                                    <textarea class="xxlarge" id="desc" name="desc"></textarea>
+                                <div class="clearfix">
+                                    <label for="desc">What do you want the key for?</label>
+                                    <div class="input">
+                                        <textarea class="xxlarge" id="desc" name="desc"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="actions">
-                                <input type="submit" class="btn primary" value="Get a key"/>
-                            </div>
-                        </fieldset>
-                    </form>
+                                <div class="actions">
+                                    <input type="submit" class="btn primary" value="Get a key"/>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            <?php } else if($key = user_has_key($uname)) { // user is logged in and has key ?>
+                <p>Your key:</p>
+                <pre><code><?php echo $key; ?></code></pre>
+            <?php } ?>
         </section>
         <section id="contents">
             <h1>Contents <strong>status</strong></h1>
@@ -112,13 +169,13 @@
             <?php } ?>
             </ul>
         </section>
-        <?php foreach($sections as $key=> $section) { ?>
+        <?php foreach($sections as $section) { ?>
         <section id="<?php echo $section; ?>">
-            <?php require_once('sections/'.$section.'.html'); ?>
+            <?php require_once('sections/'.$section.'.php'); ?>
         </section>
         <?php } ?>
         <section id="contact">
-            <?php require_once('sections/contact.html'); ?>
+            <?php require_once('sections/contact.php'); ?>
         </section>
         <footer>
             <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>

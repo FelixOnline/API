@@ -46,32 +46,8 @@
     <div class="container">
         <div class="hero-unit">
             <h1>Felix Online API</h1>
-            <p>Welcome to the Felix Online API. Please login to see the documentation or request an API key.</p>
-            <?php echo '<form action="docs/" id="loginForm" method="post">';?>
-                <fieldset>
-                    <div class="clearfix">
-                        <label for="username">IC Username</label>
-                        <div class="input">
-                            <input type="text" class="xlarge" name="username" id="username" size="30" />
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <label for="password">IC Password</label>
-                        <div class="input">
-                            <input type="password" class="xlarge" name="password" id="password" size="30" />
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <label for="rememberButton">Remember Me</label>
-                        <div class="input">
-                            <input type="checkbox" name="remember" id="rememberButton" value="rememberme" />
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <input type="submit" value="Login &raquo;" name="login" id="submit" class="btn primary large"/>
-                    </div>
-                </fieldset>
-            </form>
+            <p>Welcome to the Felix Online API.</p>
+            <a href="docs/" class="btn primary large">Documentation &raquo;</a>
         </div>
         <footer>
             <p>Copyright &copy; Felix  2011</p>
