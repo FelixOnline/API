@@ -107,7 +107,7 @@
             <h1>Get an API key</h1>
             <?php if(!($uname = is_logged_in())) { // user is not logged in ?>
                 <h4>You need to be logged in to request an API key</h4>
-                <form action="" method="post">
+                    <form action="<?php echo AUTHENTICATION_PATH; ?>" method="post">
                     <fieldset>
                         <div class="clearfix">
                             <label for="username">IC Username</label>

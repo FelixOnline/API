@@ -26,4 +26,6 @@
     define('ADMIN_URL','http://felixonline.co.uk/engine/');
 
     define('PRODUCTION_FLAG', true); // if set to true css and js will be minified etc..
+    define('AUTHENTICATION', true); // if set to false then authentication will be turned off across the site. ONLY TURN OFF ON LOCAL SERVER
+	define('AUTHENTICATION_PATH','https://dougal.union.ic.ac.uk/media/felix/'); // change authentication path to local file for local dev (default is https://dougal.union.ic.ac.uk/media/felix/)
 ?>
