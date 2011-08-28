@@ -63,6 +63,10 @@ function get_api_key() {
     };
 }
 
+function curPageURLNonSecure() {
+ return 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+}
+
 /* ---------------------------------------------------------- */
 /* END of general functions */
 /* ---------------------------------------------------------- */

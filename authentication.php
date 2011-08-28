@@ -81,7 +81,7 @@
         }
     }
 
-	//$session_param1 = "?session=".session_id();
-	//$session_param2 = "&session=".session_id();
+    $session_param1 = "?session=".session_id();
+    $session_param2 = "&session=".session_id();
 
 ?>
