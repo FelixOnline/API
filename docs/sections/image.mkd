@@ -1,4 +1,10 @@
 # Image
 
-Coming soon..
+### Requires:
+* Image id `id=`
+
+### Returns:
+* image\_url
+* image\_caption
+* image\_credit
 
