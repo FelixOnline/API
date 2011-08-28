@@ -5,17 +5,28 @@
 
 ### Returns:
 
-* article\_title
-* article\_teaser
-* article\_author
-* article\_author\_full
-* article\_category
-* article\_category\_display
-* article\_date
-* article\_image
-* article\_content
-* article\_url
-* article\_comments
+* `article_title`
+Full article title
+* `article_teaser`
+article teaser text
+* `article_author`
+Article author's id
+* `article_author_full`
+Article author's full name
+* `article_category`
+Article category
+* `article_category_display`
+Article category display name
+* `article_date`
+Article date (Unix timestamp)
+* `article_image`
+Link to article image api reference
+* `article_content`
+Article content
+* `article_url`
+Ariticle url on Felix Online
+* `article_comments`
+Link to article comments api reference
 
 ## Example Call: 
     http://api.felixonline.co.uk/?key=API_KEY&what=article&id=1338
