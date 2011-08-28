@@ -103,6 +103,24 @@ section {
             font-size: 18px;
             color: #BFBFBF;
         }
+        
+        strong {
+            float: right;
+            font-size: 16px;
+            font-weight: normal;
+            background-color: @grayLighter;
+            margin-bottom: @baseline;
+            padding: 8px 15px;
+            color: #fff;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+            border-bottom: 1px solid rgba(0,0,0,.3);
+            .border-radius(4px);
+            #gradient > .vertical(lighten(@green, 25%), lighten(@green, 10%));
+            border-bottom-color: @green;
+            padding: 2px 7px 4px 7px;
+            line-height: 20px;
+            margin-top: 5px;
+        }
     }
 }
 

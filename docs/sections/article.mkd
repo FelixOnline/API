@@ -1,4 +1,4 @@
-# Article *Access to all the articles on Felix Online*
+# Article *Access to all the articles on Felix Online* **partial**
 
 ### Requires:
 * Article id `id=`

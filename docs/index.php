@@ -105,7 +105,7 @@
             </div>
         </section>
         <section id="contents">
-            <h1>Contents</h1>
+            <h1>Contents <strong>status</strong></h1>
             <ul>
             <?php foreach($sections as $section) { ?>
                 <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
