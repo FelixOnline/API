@@ -162,7 +162,7 @@
             <?php } ?>
         </section>
         <section id="contents">
-            <h1>Contents <strong>status</strong></h1>
+            <h1>Contents <strong>support</strong></h1>
             <ul>
             <?php foreach($sections as $section) { ?>
                 <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
@@ -180,8 +180,7 @@
         <footer>
             <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
         </footer>
-  </div> <!--! end of #container -->
-
+    </div> <!--! end of #container -->
 
   <!-- JavaScript at the bottom for fast page loading -->
 
