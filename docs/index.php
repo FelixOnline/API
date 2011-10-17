@@ -48,7 +48,6 @@
 	    require_once("../inc/functions.php");
 	    require_once("../inc/const.php");
         require_once("../authentication.php");
-        require_once("markdown/markdown.php");
     ?>
 
     <?php
@@ -102,7 +101,7 @@
     </div>
     <div class="container">
         <section id="overview">
-            <?php echo Markdown(file_get_contents('sections/overview.mkd')); ?>
+            <?php require_once('sections/overview.php'); ?>
         </section>
         <section id="api_key">
             <h1>Get an API key</h1>
@@ -172,11 +171,11 @@
         </section>
         <?php foreach($sections as $section) { ?>
         <section id="<?php echo $section; ?>">
-            <?php echo Markdown(file_get_contents('sections/'.$section.'.mkd')); ?>
+            <?php require_once('sections/'.$section.'.php'); ?>
         </section>
         <?php } ?>
         <section id="contact">
-            <?php echo Markdown(file_get_contents('sections/contact.mkd')); ?>
+            <?php require_once('sections/contact.php'); ?>
         </section>
         <footer>
             <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
