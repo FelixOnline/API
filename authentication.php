@@ -41,7 +41,7 @@
         if (($session = $_GET['session']) && is_session_recent($session) && ($_GET['login'] != 'FAIL'))
             login(get_user_from_session($session));
             if (isset($_GET['remember']))
-                setcookie('felixonline', $_SESSION['felix']['uname'], time()+60*60*24*30, "/");
+                setcookie('felixonline', $_SESSION['felix']['uname'], time()+60*60*24*30, "/", '.felixonline.co.uk');
         if ($_POST['logout'])
             logout();
     } else {
