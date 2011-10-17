@@ -49,6 +49,94 @@ function user_has_key($uname) {
     };
 }
 
+function set_session($session,$user) {
+    global $cid;
+    $user = strtolower($user);
+    if ($session != "" && $user != "")
+        if (mysql_query("INSERT INTO `login` (session_id,user) VALUES ('$session','$user')",$cid))
+            return true;
+    return false;
+}
+
+function get_user_from_session($session) {
+    global $cid;
+    $sql = "SELECT user FROM `login` WHERE session_id='$session' ORDER BY id DESC LIMIT 1";
+    return mysql_result(mysql_query($sql,$cid),0);
+}
+
+function is_session_recent($session) {
+    global $cid;
+    $sql = "SELECT TIMESTAMPDIFF(SECOND,timestamp,NOW()) AS timediff FROM `login` WHERE session_id='$session' AND valid=1 ORDER BY timediff ASC LIMIT 1";
+    $result = mysql_query($sql,$cid);
+    if (mysql_num_rows($result)) {
+        $session_age = mysql_result($result,0);
+        return ($session_age <= SESSION_LENGTH);
+    }
+    else
+        return false;
+}
+
+function destroy_sessions($user) {
+    global $cid;
+    return mysql_query("UPDATE login SET valid=0 WHERE user='$user'",$cid);
+}
+
+function destroy_old_sessions($user) {
+    global $cid;
+    return mysql_query("UPDATE login SET valid=0 WHERE user='$user' AND timestamp < TIMESTAMPADD(SECOND,-30,NOW())",$cid);
+}
+
+function login($username) {
+    if (!($_SESSION['felix']['vname'] = get_vname_by_uname_ldap($username)))
+        return false;
+    $_SESSION['felix']['name'] = get_forename($username);
+    $_SESSION['felix']['uname'] = $username;
+    $_SESSION['felix']['loggedin'] = true;
+    destroy_old_sessions($username);
+    update_login_name($username,$_SESSION['felix']['vname']);
+    return true;
+}
+
+function update_login_name($user,$name) {
+    global $cid;
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $name = trim($name);
+    $sql = "INSERT INTO `user` (user,name,visits,ip) VALUES ('$user','$name',1,'$ip') ON DUPLICATE KEY UPDATE name='$name',visits=visits+1,ip='$ip',timestamp=NOW()";
+    return($user && $name && mysql_query($sql,$cid));
+}
+
+function get_vname_by_uname_ldap($uname) {
+    $ds=ldap_connect("addressbook.ic.ac.uk");
+    $r=ldap_bind($ds);
+    $justthese = array("gecos");
+    $sr=ldap_search($ds, "ou=People, ou=everyone, dc=ic, dc=ac, dc=uk", "uid=$uname", $justthese);
+    $info = ldap_get_entries($ds, $sr);
+    if ($info["count"] > 0)
+        return $info[0]['gecos'][0];
+    else
+        return false;
+}
+
+function get_forename($uname) {
+    $ds=ldap_connect("addressbook.ic.ac.uk");
+    $r=ldap_bind($ds);
+    $justthese = array("givenname");
+    $sr=ldap_search($ds, "o=Imperial College, c=GB", "uid=$uname", $justthese);
+    $info = ldap_get_entries($ds, $sr);
+    if ($info["count"] > 0)
+        return $info[0][givenname][0];
+    else
+        return $uname;
+}
+
+function logout() {
+    if ($user = $_SESSION['felix']['uname'])
+        destroy_sessions($user);
+    $_SESSION['felix']['loggedin'] = false;
+    if(isset($_COOKIE['felixonline']))
+        setcookie("felixonline", "", time(), "/");
+}
+
 /* For use in example calls.
  * If user is logged in and has a key then return that key. Else return 'API_KEY'.
  */

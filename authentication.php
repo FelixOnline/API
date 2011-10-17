@@ -4,8 +4,10 @@
 
     /* If authentication is enabled */
     if (AUTHENTICATION == true) {
-        if (strstr($_SERVER['HTTP_HOST'],"union.ic.ac.uk") !== false)
-            header("Location: ".STANDARD_URL.substr($_SERVER['REQUEST_URI'],(1+strrpos($_SERVER['REQUEST_URI'],"/"))));
+        if (strstr($_SERVER['HTTP_HOST'],"union.ic.ac.uk") !== false) {
+            echo strstr($_SERVER['HTTP_HOST'],"union.ic.ac.uk");
+	    //header("Location: ".STANDARD_URL.substr($_SERVER['REQUEST_URI'],(1+strrpos($_SERVER['REQUEST_URI'],"/"))));
+	}
         session_name("felix");
         session_start();
         $session = session_id();
@@ -38,10 +40,12 @@
         /* Check if user has been remembered */
         if(isset($_COOKIE['felixonline']))
             re_login($_COOKIE['felixonline']);
-        if (($session = $_GET['session']) && is_session_recent($session) && ($_GET['login'] != 'FAIL'))
-            login(get_user_from_session($session));
-            if (isset($_GET['remember']))
-                setcookie('felixonline', $_SESSION['felix']['uname'], time()+60*60*24*30, "/", '.felixonline.co.uk');
+        if (($session = $_GET['session']) && is_session_recent($session) && ($_GET['login'] != 'FAIL')) {
+            $get_user = get_user_from_session($session);
+            login($get_user);
+	}
+        if (isset($_GET['remember']))
+            setcookie('felixonline', $_SESSION['felix']['uname'], time()+60*60*24*30, "/", '.felixonline.co.uk');
         if ($_POST['logout'])
             logout();
     } else {
