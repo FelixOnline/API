@@ -137,6 +137,15 @@ function logout() {
         setcookie("felixonline", "", time(), "/");
 }
 
+function re_login($username) {
+    if (!($_SESSION['felix']['vname'] = get_vname_by_uname_ldap($username)))
+        return false;
+    $_SESSION['felix']['name'] = get_forename($username);
+    $_SESSION['felix']['uname'] = $username;
+    $_SESSION['felix']['loggedin'] = true;
+    return true;
+}
+
 /* For use in example calls.
  * If user is logged in and has a key then return that key. Else return 'API_KEY'.
  */
