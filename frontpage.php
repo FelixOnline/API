@@ -55,7 +55,7 @@
   </div> <!--! end of #container -->
 
 
-  <!-- JavaScript at the bottom for fast page loading -->
+  <!-- JavaScript at the bottom for fast page loading --> 
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
