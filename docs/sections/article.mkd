@@ -19,14 +19,14 @@ Article category
 Article category display name
 * `article_date`
 Article date (Unix timestamp)
-* `article_image`
-Link to article image api reference
+* `article_image_id`
+Article image id to be used in image api call 
 * `article_content`
 Article content
 * `article_url`
 Ariticle url on Felix Online
-* `article_comments`
-Link to article comments api reference
+* `article_comment_num`
+Number of comments on article
 
 ## Example Call: 
 <pre>

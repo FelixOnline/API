@@ -22,15 +22,12 @@
 
     switch($data->getMethod())
     {
-        // this is a request for all users, not one in particular
+        // this is a request for certain article based on ID
         case 'get':
-            //$user_list = getUserList(); // assume this returns an array
-
             // check for article ID
             if(!isset($_GET['id'])){
                 RestUtils::sendResponse(404);
             } else {
-
                 $id = $_GET['id'];
 
                 $article = array(
@@ -41,7 +38,7 @@
 				    'article_category' => get_article_category_cat($id),
 				    'article_category_display' => get_article_category($id),
 				    'article_date' => get_article_publishdate($id),
-                    'article_image' => '',
+                    'article_image_id' => get_article_image_id($id),
 				    'article_content' => clean_content2(get_article_text(($id))),
 			        'article_url' => STANDARD_URL.article_url($id),
 				    'article_comments' => '',

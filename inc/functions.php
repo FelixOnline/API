@@ -161,7 +161,7 @@ function get_api_key() {
 }
 
 function curPageURLNonSecure() {
- return 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    return 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 }
 
 /* ---------------------------------------------------------- */
@@ -273,6 +273,17 @@ function article_url($article) {
 
 	$output = $cat.'/'.$article.'/'.$dashed.'/';
 	return $output;
+}
+
+function get_article_image_id($id) {
+	global $dbok,$cid;
+	if ($dbok) {
+		$sql = "SELECT img1 FROM `article` WHERE id=$id";
+		if ($imgid = mysql_result(mysql_query($sql,$cid),0))
+			return $imgid;
+		else
+			return false;
+	}
 }
 
 /* ---------------------------------------------------------- */
