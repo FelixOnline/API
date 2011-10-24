@@ -5,19 +5,7 @@
      *
      *  Get article information from id
      *
-     *  Returns:
-     *      article_title
-     *      article_teaser
-     *      article_author
-     *      article_author_full
-     *      article_category
-     *      article_category_display
-     *      article_date
-     *      article_image
-     *          api url for article api
-     *      article_content
-     *      article_url
-     *      article_comments
+     *  See docs
      */
 
     switch($data->getMethod())
