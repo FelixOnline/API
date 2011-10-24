@@ -24,6 +24,7 @@
     define('STANDARD_URL','http://felixonline.co.uk/');
     define('BASE_URL','http://felixonline.co.uk/');
     define('ADMIN_URL','http://felixonline.co.uk/engine/');
+    define('API_URL','http://api.felixonline.co.uk/');
 
     define('PRODUCTION_FLAG', true); // if set to true css and js will be minified etc..
     define('AUTHENTICATION', true); // if set to false then authentication will be turned off across the site. ONLY TURN OFF ON LOCAL SERVER

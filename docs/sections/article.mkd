@@ -20,7 +20,7 @@ Article category display name
 * `article_date`
 Article date (Unix timestamp)
 * `article_image_id`
-Article image id to be used in image api call 
+Article image id to be used in image api call. Returns empty string if no image found.
 * `article_content`
 Article content
 * `article_url`
@@ -30,7 +30,7 @@ Number of comments on article
 
 ## Example Call: 
 <pre>
-    <code>http://api.felixonline.co.uk/?key=<?php echo get_api_key(); ?>&what=article&id=1338</code>
+    <code><?php echo API_URL; ?>?key=<?php echo get_api_key(); ?>&what=article&id=1338</code>
 </pre>
 ## Example Output:
     {
@@ -55,6 +55,6 @@ Number of comments on article
         <p>
             By Victor du Mesnil du Buisson</p>
         "
-        article_url: "http://localhost/felix/phoenix/1338/nature-of-man/"
+        article_url: "http://api.felixonline.co.uk/phoenix/1338/nature-of-man/"
         article_comments: ""
     }

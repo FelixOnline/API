@@ -282,7 +282,7 @@ function get_article_image_id($id) {
 		if ($imgid = mysql_result(mysql_query($sql,$cid),0))
 			return $imgid;
 		else
-			return false;
+			return '';
 	}
 }
 
