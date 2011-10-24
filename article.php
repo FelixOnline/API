@@ -29,7 +29,7 @@
                     'article_image_id' => get_article_image_id($id),
 				    'article_content' => clean_content2(get_article_text(($id))),
 			        'article_url' => STANDARD_URL.article_url($id),
-				    'article_comments' => '',
+				    'article_comment_num' => '',
                 );
 
                 RestUtils::sendResponse(200, json_encode($article), 'application/json');

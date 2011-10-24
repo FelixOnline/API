@@ -41,7 +41,7 @@ Number of comments on article
         article_category: "phoenix"
         article_category_display: "Phoenix"
         article_date: "1307685600"
-        article_image: ""
+        article_image_id: "1279"
         article_content: "<p>
             To recall colour beyond the fracture of days,<br />
             Or relish a dawn from Eden&rsquo;s sweet gaze.<br />
@@ -56,5 +56,5 @@ Number of comments on article
             By Victor du Mesnil du Buisson</p>
         "
         article_url: "http://api.felixonline.co.uk/phoenix/1338/nature-of-man/"
-        article_comments: ""
+        article_comment_num: ""
     }
