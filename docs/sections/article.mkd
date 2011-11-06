@@ -19,18 +19,18 @@ Article category
 Article category display name
 * `article_date`
 Article date (Unix timestamp)
-* `article_image`
-Link to article image api reference
+* `article_image_id`
+Article image id to be used in image api call. Returns empty string if no image found.
 * `article_content`
 Article content
 * `article_url`
 Ariticle url on Felix Online
-* `article_comments`
-Link to article comments api reference
+* `article_comment_num`
+Number of comments on article
 
 ## Example Call: 
 <pre>
-    <code>http://api.felixonline.co.uk/?key=<?php echo get_api_key(); ?>&what=article&id=1338</code>
+    <code><?php echo API_URL; ?>?key=<?php echo get_api_key(); ?>&what=article&id=1338</code>
 </pre>
 ## Example Output:
     {
@@ -41,7 +41,7 @@ Link to article comments api reference
         article_category: "phoenix"
         article_category_display: "Phoenix"
         article_date: "1307685600"
-        article_image: ""
+        article_image_id: "1279"
         article_content: "<p>
             To recall colour beyond the fracture of days,<br />
             Or relish a dawn from Eden&rsquo;s sweet gaze.<br />
@@ -55,6 +55,6 @@ Link to article comments api reference
         <p>
             By Victor du Mesnil du Buisson</p>
         "
-        article_url: "http://localhost/felix/phoenix/1338/nature-of-man/"
-        article_comments: ""
+        article_url: "http://api.felixonline.co.uk/phoenix/1338/nature-of-man/"
+        article_comment_num: ""
     }

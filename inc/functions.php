@@ -7,7 +7,7 @@
 */
 
 /* ---------------------------------------------------------- */
-/* General api functions */
+/* General api functions { */
 /* ---------------------------------------------------------- */
 
 /* Generate api key */
@@ -250,15 +250,15 @@ function get_api_key() {
 }
 
 function curPageURLNonSecure() {
- return 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    return 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 }
 
 /* ---------------------------------------------------------- */
-/* END of general functions */
+/* } END of general functions */
 /* ---------------------------------------------------------- */
 
 /* ---------------------------------------------------------- */
-/* Article functions */
+/* Article functions { */
 /* ---------------------------------------------------------- */
 
 /* Get article title from id */
@@ -364,8 +364,26 @@ function article_url($article) {
 	return $output;
 }
 
+function get_article_image_id($id) {
+	global $dbok,$cid;
+	if ($dbok) {
+		$sql = "SELECT img1 FROM `article` WHERE id=$id";
+		if ($imgid = mysql_result(mysql_query($sql,$cid),0))
+			return $imgid;
+		else
+			return '';
+	}
+}
+
 /* ---------------------------------------------------------- */
-/* END of article api functions */
+/* } END of article api functions */
 /* ---------------------------------------------------------- */
 
+/* ---------------------------------------------------------- */
+/* Image Functions { */
+/* ---------------------------------------------------------- */
+
+/* ---------------------------------------------------------- */
+/* } END of image functions */
+/* ---------------------------------------------------------- */
 ?>
