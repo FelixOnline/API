@@ -6,39 +6,39 @@
 <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
        More info: h5bp.com/b/378 -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Felix Online API Documentation</title>
-  <meta name="description" content="The Felix Online API documentation">
-  <meta name="author" content="Jonathan Kim">
+    <title>Felix Online API Documentation</title>
+    <meta name="description" content="The Felix Online API documentation">
+    <meta name="author" content="Jonathan Kim">
 
-  <!-- Facebook Meta -->
-  <meta property="og:title" content=""/>
-  <meta property="og:url" content=""/>
-  <meta property="og:description" content=""/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image" content="img/logo.jpg"/>
-  <meta property="fb:admins" content="" />
+    <!-- Facebook Meta -->
+    <meta property="og:title" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="img/logo.jpg"/>
+    <meta property="fb:admins" content="" />
 
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
-  <!-- LESS: implied media="all" -->
-  <link rel="stylesheet/less" type="text/css/" href="css/style.less">
-  <script src="js/libs/less-1.1.4.min.js" type="text/javascript"></script>
+    <!-- LESS: implied media="all" -->
+    <link rel="stylesheet/less" type="text/css/" href="css/style.less">
+    <script src="js/libs/less-1.1.4.min.js" type="text/javascript"></script>
 
-  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+    <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
-  <!-- All JavaScript at the bottom, except for this custom Modernizr build containing Respond.
+    <!-- All JavaScript at the bottom, except for this custom Modernizr build containing Respond.
        Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
        For optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
-  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+    <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
@@ -48,6 +48,15 @@
 	    require_once("../inc/functions.php");
 	    require_once("../inc/const.php");
         require_once("../authentication.php");
+
+        if(isset($_POST['keygen'])) {
+            $keygen = gen_api_key(is_logged_in());
+            if(!store_api_key($keygen, is_logged_in(), $_POST['desc'])){
+                echo 'ERROR';
+            } else {
+                send_api_gen_email(is_logged_in(), $desc); // Send email confirmation
+            }
+        }
     ?>
 
     <?php
@@ -135,7 +144,7 @@
             <?php } else if(!user_has_key($uname)) { // user is logged in but doesn't have a key ?>
                 <div class="row">
                     <div class="span16">
-                        <form id="api_key_form">
+                        <form id="api_key_form" action="<?php echo API_URL; ?>docs/" method="post">
                             <fieldset>
                                 <div class="clearfix">
                                     <label for="name">Name:</label>
@@ -148,9 +157,12 @@
                                     <div class="input">
                                         <textarea class="xxlarge" id="desc" name="desc"></textarea>
                                     </div>
+                                    <div class="input">
+                                        <span class="error">You need to put a description in the box above</span>
+                                    </div>
                                 </div>
                                 <div class="actions">
-                                    <input type="submit" class="btn primary" value="Get a key"/>
+                                    <input type="submit" class="btn primary" value="Get a key" name="keygen" id="keygen"/>
                                 </div>
                             </fieldset>
                         </form>

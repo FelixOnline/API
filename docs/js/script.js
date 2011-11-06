@@ -21,7 +21,11 @@ $(document).ready(function() {
     $('#contents').localScroll();
 
     $('#api_key_form').submit(function() {
-        return false;
+        var desc = $(this).find('#desc').val();
+        if(desc == '') {
+            $(this).find('.error').show();
+            return false;
+        }
     });
 });
 
