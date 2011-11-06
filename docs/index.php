@@ -54,7 +54,7 @@
             if(!store_api_key($keygen, is_logged_in(), $_POST['desc'])){
                 echo 'ERROR';
             } else {
-                send_api_gen_email(is_logged_in(), $desc); // Send email confirmation
+                send_api_gen_email(is_logged_in(), $_POST['desc']); // Send email confirmation
             }
         }
     ?>
