@@ -117,6 +117,31 @@ function check_key($key) {
     return mysql_num_rows(mysql_query($sql, $cid));
 }
 
+/*
+ * Log api request
+ * 
+ * Requires: 
+ *      $get - $_GET array from request
+ *
+ */
+function log_api_request($get) {
+	global $dbok,$cid;
+    $key = $get['key'];
+    $sql = "SELECT * FROM `api_keys` WHERE api_key='".$key."'";
+	$user = mysql_fetch_array(mysql_query($sql,$cid));
+
+    $userid = $user['id'];
+    $what = $get['what']; 
+    $request = json_encode($get);
+    $sql = "INSERT INTO `api_log` (user_id,what,request,timestamp) VALUES ('$userid','$what','$request',NOW())";
+
+    if(mysql_query($sql,$cid)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function is_logged_in() { // returns active user or false
     if ($_SESSION['felix']['loggedin'])
         return $_SESSION['felix']['uname'];

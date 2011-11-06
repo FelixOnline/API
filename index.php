@@ -26,7 +26,7 @@
             if(!isset($_GET['what'])){
                 RestUtils::sendResponse(404);
             } else {
-                // find out what it is requesting
+                log_api_request($_GET);
                 if(file_exists(getcwd().'/'.$_GET['what'].'.php')) {
                     require_once($_GET['what'].'.php');
                 } else {
