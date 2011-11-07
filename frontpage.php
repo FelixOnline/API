@@ -43,11 +43,11 @@
 
 <body>
 
-    <div class="container">
+    <div class="container frontpage">
         <div class="hero-unit">
             <h1>Felix Online API</h1>
             <p>Welcome to the Felix Online API.</p>
-            <a href="docs/" class="btn primary large">Documentation &raquo;</a>
+            <a href="docs/" class="btn primary large" id="docbutton">Documentation &raquo;</a>
         </div>
         <footer>
             <p>Copyright &copy; Felix  2011</p>
