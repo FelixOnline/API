@@ -6,8 +6,8 @@
     if (AUTHENTICATION == true) {
         if (strstr($_SERVER['HTTP_HOST'],"union.ic.ac.uk") !== false) {
             echo strstr($_SERVER['HTTP_HOST'],"union.ic.ac.uk");
-	    //header("Location: ".STANDARD_URL.substr($_SERVER['REQUEST_URI'],(1+strrpos($_SERVER['REQUEST_URI'],"/"))));
-	}
+	        //header("Location: ".STANDARD_URL.substr($_SERVER['REQUEST_URI'],(1+strrpos($_SERVER['REQUEST_URI'],"/"))));
+	    }
         session_name("felix");
         session_start();
         $session = session_id();

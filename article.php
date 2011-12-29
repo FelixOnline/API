@@ -8,8 +8,7 @@
      *  See docs
      */
 
-    switch($data->getMethod())
-    {
+    switch($data->getMethod()) {
         // this is a request for certain article based on ID
         case 'get':
             // check for article ID

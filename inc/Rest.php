@@ -1,17 +1,14 @@
 <?php
 
-class RestUtils
-{
-    public static function processRequest()
-    {
+class RestUtils {
+    public static function processRequest() {
         // get our verb
         $request_method = strtolower($_SERVER['REQUEST_METHOD']);
         $return_obj     = new RestRequest();
         // we'll store our data here
         $data           = array();
 
-        switch ($request_method)
-        {
+        switch ($request_method) {
             // gets are easy...
             case 'get':
                 $data = $_GET;
@@ -38,16 +35,14 @@ class RestUtils
         // other pieces to your requests)
         $return_obj->setRequestVars($data);
 
-        if(isset($data['data']))
-        {
+        if(isset($data['data'])) {
             // translate the JSON to an Object for use however you want
             $return_obj->setData(json_decode($data['data']));
         }
         return $return_obj;
     }
 
-    public static function sendResponse($status = 200, $body = '', $content_type = 'text/html')
-    {
+    public static function sendResponse($status = 200, $body = '', $content_type = 'text/html') {
         $status_header = 'HTTP/1.1 ' . $status . ' ' . RestUtils::getStatusCodeMessage($status);
         // set the status
         header($status_header);
@@ -108,8 +103,7 @@ class RestUtils
         }
     }
 
-    public static function getStatusCodeMessage($status)
-    {
+    public static function getStatusCodeMessage($status) {
         // these could be stored in a .ini file and loaded
         // via parse_ini_file()... however, this will suffice
         // for an example
@@ -161,53 +155,44 @@ class RestUtils
     }
 }
 
-class RestRequest
-{
+class RestRequest {
     private $request_vars;
     private $data;
     private $http_accept;
     private $method;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->request_vars     = array();
         $this->data             = '';
         $this->http_accept      = (strpos($_SERVER['HTTP_ACCEPT'], 'json')) ? 'json' : 'xml'; // require get request for json or xml?
         $this->method           = 'get';
     }
 
-    public function setData($data)
-    {
+    public function setData($data) {
         $this->data = $data;
     }
 
-    public function setMethod($method)
-    {
+    public function setMethod($method) {
         $this->method = $method;
     }
 
-    public function setRequestVars($request_vars)
-    {
+    public function setRequestVars($request_vars) {
         $this->request_vars = $request_vars;
     }
 
-    public function getData()
-    {
+    public function getData() {
         return $this->data;
     }
 
-    public function getMethod()
-    {
+    public function getMethod() {
         return $this->method;
     }
 
-    public function getHttpAccept()
-    {
+    public function getHttpAccept() {
         return $this->http_accept;
     }
 
-    public function getRequestVars()
-    {
+    public function getRequestVars() {
         return $this->request_vars;
     }
 }

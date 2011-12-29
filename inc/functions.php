@@ -1,5 +1,4 @@
 <?php
-
 /*
 	API functions
 	Author: Jonathan Kim
