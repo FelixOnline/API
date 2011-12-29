@@ -11,30 +11,53 @@
 	//require_once("inc/config.inc.php");
 	//require_once("inc/functions.php");
 	//require_once("inc/const.php");
+    require_once("inc/api.php");
     require_once("inc/Rest.php");
     require_once("glue.php");
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
 
     $urls = array(
         '/' => 'indexController',
-        '/article' => 'articleController',
-        '/article/([a-zA-Z0-9]+)' => 'articleController'
+        '/articles' => 'articleController',
+        '/articles/(?P<id>[a-zA-Z0-9]+)' => 'articleController'
     );
 
+    /*
+     * Index Controller
+     */
     class indexController {
         function GET() {
-            echo 'Hello';
+            require_once('frontpage.php');
         }
     }
 
-    class articleController {
+    /*
+     * Base Controller
+     */
+    class BaseController {
+        function __construct() {
+            //API::log_api_request($_GET);
+        }
+    }
+
+    /*
+     * Article Controller
+     */
+    class articleController extends BaseController {
         function GET($matches) {
-            echo 'article';
-            var_dump($matches); 
+            if(array_key_exists('id', $matches)) { // if specific article
+                echo $matches['id'];
+            } else {
+                echo 'All articles';
+            }
         }
     }
 
-    glue::stick($urls);
+    try { // try mapping request to urls
+        glue::stick($urls);
+    } catch (Exception $e) { // if it fails then send a 404 response
+        RestUtils::sendResponse(404);
+    }
 
     /*
     $data = RestUtils::processRequest();

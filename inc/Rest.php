@@ -50,8 +50,7 @@ class RestUtils {
         header('Content-type: ' . $content_type);
 
         // pages with body are easy
-        if($body != '')
-        {
+        if($body != '') {
             // send the body
             echo $body;
             exit;
@@ -64,8 +63,7 @@ class RestUtils {
             // this is purely optional, but makes the pages a little nicer to read
             // for your users.  Since you won't likely send a lot of different status codes,
             // this also shouldn't be too ponderous to maintain
-            switch($status)
-            {
+            switch($status) {
                 case 401:
                     $message = 'You must be authorized to view this page.';
                     break;
