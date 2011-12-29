@@ -12,8 +12,31 @@
 	//require_once("inc/functions.php");
 	//require_once("inc/const.php");
     require_once("inc/Rest.php");
+    require_once("glue.php");
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
 
+    $urls = array(
+        '/' => 'indexController',
+        '/article' => 'articleController',
+        '/article/([a-zA-Z0-9]+)' => 'articleController'
+    );
+
+    class indexController {
+        function GET() {
+            echo 'Hello';
+        }
+    }
+
+    class articleController {
+        function GET($matches) {
+            echo 'article';
+            var_dump($matches); 
+        }
+    }
+
+    glue::stick($urls);
+
+    /*
     $data = RestUtils::processRequest();
 
     if(!$data->getRequestVars()) { // if there are aren't any request vars then show frontpage
@@ -37,4 +60,5 @@
             }
         }
     }
+     */
 ?>
