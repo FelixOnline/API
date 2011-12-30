@@ -25,7 +25,8 @@
     $urls = array(
         '/' => 'indexController',
         '/articles' => 'articleController',
-        '/articles/(?P<id>[a-zA-Z0-9]+)' => 'articleController'
+        '/articles/(?P<id>[0-9]+)' => 'articleController',
+        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController'
     );
 
     try { // try mapping request to urls

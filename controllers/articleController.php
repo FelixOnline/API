@@ -24,6 +24,8 @@ class articleController extends BaseController {
                 json_encode($output), 
                 'application/json'
             );
+        } else if(array_key_exists('cat', $matches)) {
+            echo 'Cat: '.$matches['cat']; 
         } else {
             echo 'All articles';
         }
