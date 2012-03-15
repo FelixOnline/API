@@ -6,17 +6,22 @@
 			Version: 0.1
 	*/
 
+    // define current working directory
+    if(!defined('API_DIRECTORY')) define('API_DIRECTORY', dirname(__FILE__));
+
     // bootstrap Felix environment
-    require_once("../inc/common.inc.php");
+    require_once(API_DIRECTORY.'/../bootstrap.php');
+	require_once(BASE_DIRECTORY.'/inc/exceptions.inc.php');
     require_once("inc/api.php");
-    require_once("inc/Rest.php");
-    require_once("glue.php");
-    require_once("controllers/baseController.php");
-    require_once("controllers/indexController.php");
-    require_once("controllers/articleController.php");
-	//require_once("inc/config.inc.php");
-	//require_once("inc/functions.php");
-	//require_once("inc/const.php");
+    require_once("inc/rest.php");
+
+    /*
+     * Include Controllers
+     */
+    require_once(API_DIRECTORY.'/controllers/baseController.php');
+    foreach (glob(API_DIRECTORY.'/controllers/*.php') as $filename) {
+        require_once($filename);
+    }
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
 
     /*

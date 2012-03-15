@@ -12,7 +12,7 @@ class articleController extends BaseController {
                 'article_authors' => $article->getAuthors(),
                 'article_category' => $article->getCategoryCat(),
                 'article_category_display' => $article->getCategoryLabel(),
-                'article_publish_date' => $article->getPublishdate(),
+                'article_publish_date' => $article->getPublished(),
                 'article_image_id' => ' ',
                 'article_content' => ' ',
                 'article_url' => $article->getURL(),

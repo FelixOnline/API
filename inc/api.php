@@ -119,7 +119,7 @@ class API {
      *      $get - $_GET array from request
      *
      */
-    public static function log_api_request($get) {
+    public static function log_api_request($class) {
         global $db;
         //$key = $db->escape($get['key']);
         //$sql = "SELECT * FROM `api_keys` WHERE api_key='".$key."'";
@@ -127,7 +127,7 @@ class API {
 
         //$what = $get['what']; 
         //$request = json_encode($get);
-        $sql = "INSERT INTO `api_log` (request,timestamp,ip) VALUES ('".json_encode($_SERVER)."',NOW(),'".$_SERVER['REMOTE_ADDR']."')";
+        $sql = "INSERT INTO `api_log` (what,request,timestamp,ip) VALUES ('".$class."','".json_encode($_SERVER)."',NOW(),'".$_SERVER['REMOTE_ADDR']."')";
         return $db->query($sql);
     }
 }
