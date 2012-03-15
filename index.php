@@ -31,12 +31,15 @@
         '/' => 'indexController',
         '/articles' => 'articleController',
         '/articles/(?P<id>[0-9]+)' => 'articleController',
-        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController'
+        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController',
+        '/blog' => 'blogController',
+        '/blog/(?P<name>[a-zA-Z0-9]+)' => 'blogController'
     );
 
     try { // try mapping request to urls
         glue::stick($urls);
     } catch (Exception $e) { // if it fails then send a 404 response
+        echo $e;
         RestUtils::sendResponse(404);
     }
 
