@@ -17,6 +17,7 @@ class blogController extends BaseController {
                     'type' => $post->getType(),
                     'meta' => $post->getMeta()
                 );
+                // TODO
                 $output['posts'][$key]['author'] = array(
                     'name' => $post->getAuthor()->getName(),
                     'uname' => $post->getAuthor()->getUser(),
