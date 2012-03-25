@@ -4,6 +4,7 @@
  */
 class articleController extends BaseController {
     function GET($matches) {
+        global $db;
         if(array_key_exists('id', $matches)) { // if specific article
             $article = new Article($matches['id']);
             $output = $article->getOutput();
@@ -28,9 +29,50 @@ class articleController extends BaseController {
                 'application/json'
             );
         } else if(array_key_exists('cat', $matches)) {
-            echo 'Cat: '.$matches['cat']; 
+            $category = new Category($matches['cat']);
+            $output = array();
+            $sql = "
+                    SELECT 
+                        id 
+                    FROM 
+                        `article`
+                    WHERE
+                        category = ".$category->getId()."
+                    ORDER BY 
+                        date DESC,
+                        id DESC
+                    LIMIT 0, 10
+                ";
+            foreach($db->get_results($sql) as $key => $object) {
+                $article = new Article($object->id);
+                $output[] = $article->getOutput();
+            }
+            RestUtils::sendResponse(
+                200, 
+                json_encode($output), 
+                'application/json'
+            );
         } else {
-            echo 'All articles';
+            $output = array();
+            $sql = "
+                    SELECT 
+                        id 
+                    FROM 
+                        `article`
+                    ORDER BY 
+                        date DESC,
+                        id DESC
+                    LIMIT 0, 10
+                ";
+            foreach($db->get_results($sql) as $key => $object) {
+                $article = new Article($object->id);
+                $output[] = $article->getOutput();
+            }
+            RestUtils::sendResponse(
+                200, 
+                json_encode($output), 
+                'application/json'
+            );
         }
     }
 }
