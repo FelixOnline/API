@@ -23,13 +23,17 @@ class ArticleHelper extends BaseHelper {
         unset($output['img1']);
         unset($output['img2']);
         unset($output['img2lr']);
-        $output['image'] = '';
+        $output['image'] = null;
         if($this->this->getImage()) {
             $output['image'] = $this->this->getImage()->getOutput();
         }
 
         // category
         $output['category'] = $this->this->getCategory()->getOutput();
+
+        // url
+        $output['url'] = $this->this->getURL();
+
         return $output;
     }
 }

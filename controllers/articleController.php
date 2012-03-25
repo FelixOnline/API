@@ -28,7 +28,7 @@ class articleController extends BaseController {
                 json_encode($output), 
                 'application/json'
             );
-        } else if(array_key_exists('cat', $matches)) {
+        } else if(array_key_exists('cat', $matches)) { // category articles
             $category = new Category($matches['cat']);
             $output = array();
             $sql = "
@@ -46,6 +46,11 @@ class articleController extends BaseController {
             foreach($db->get_results($sql) as $key => $object) {
                 $article = new Article($object->id);
                 $output[] = $article->getOutput();
+            }
+
+            $output['top_stories'] = array();
+            foreach($category->getTopStories() as $key => $article) {
+                $output['top_stories'][$key] = $article->getOutput();
             }
             RestUtils::sendResponse(
                 200, 
