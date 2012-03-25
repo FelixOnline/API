@@ -22,6 +22,15 @@
     foreach (glob(API_DIRECTORY.'/controllers/*.php') as $filename) {
         require_once($filename);
     }
+
+    /*
+     * Include Helpers
+     */
+    require_once(API_DIRECTORY.'/helpers/baseHelper.php');
+    foreach (glob(API_DIRECTORY.'/helpers/*.php') as $filename) {
+        require_once($filename);
+    }
+
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
 
     /*

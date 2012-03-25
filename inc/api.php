@@ -127,7 +127,20 @@ class API {
 
         //$what = $get['what']; 
         //$request = json_encode($get);
-        $sql = "INSERT INTO `api_log` (what,request,timestamp,ip) VALUES ('".$class."','".json_encode($_SERVER)."',NOW(),'".$_SERVER['REMOTE_ADDR']."')";
+        $sql = "INSERT INTO `api_log` 
+                (
+                    api_key,
+                    what,
+                    request,
+                    timestamp,
+                    ip
+                ) VALUES (
+                    '".$_REQUEST['key']."',
+                    '".$class."',
+                    '".json_encode($_SERVER)."',
+                    NOW(),
+                    '".$_SERVER['REMOTE_ADDR']."'
+                )";
         return $db->query($sql);
     }
 }
