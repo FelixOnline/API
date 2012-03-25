@@ -6,6 +6,8 @@ class articleController extends BaseController {
     function GET($matches) {
         if(array_key_exists('id', $matches)) { // if specific article
             $article = new Article($matches['id']);
+            $output = $article->getOutput();
+            /*
             $output = array(
                 'article_title' => $article->getTitle(),
                 'article_teaser' => $article->getTeaserFull(),
@@ -18,6 +20,7 @@ class articleController extends BaseController {
                 'article_url' => $article->getURL(),
                 'article_comment_num' => '',
             );
+             */
 
             RestUtils::sendResponse(
                 200, 
