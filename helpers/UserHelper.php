@@ -6,6 +6,8 @@ class UserHelper extends BaseHelper {
         unset($output['visits']);
         unset($output['ip']);
         unset($output['timestamp']);
+        unset($output['role']);
+
         return $output;
     }
 }

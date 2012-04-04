@@ -2,7 +2,7 @@
     <h1>Image <small>an image object</small></h1>
 </div>
 
-### Values:
+## Values:
 
 Key             | Value                     | Returns
 ----            |-------                    |--------

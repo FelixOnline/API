@@ -1,0 +1,28 @@
+<div class="page-header">
+    <h1>Category <small><code>http://api.felixonline.co.uk/articles/:cat</code></small></h1>
+</div>
+
+Returns the 10 most recent articles published to a specific category and the 4 top stories in that category
+
+## Example call:
+`http://api.felixonline.co.uk/articles/news`
+
+## Example response:
+    {
+        0: [article_object],
+        1: [article_object],
+        2: [article_object],
+        3: [article_object],
+        4: [article_object],
+        5: [article_object],
+        6: [article_object],
+        7: [article_object],
+        8: [article_object],
+        9: [article_object],
+        top_stories: {
+            1: [article_object],
+            2: [article_object],
+            3: [article_object],
+            4: [article_object]
+        }
+    }

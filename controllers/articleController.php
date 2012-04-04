@@ -50,7 +50,8 @@ class articleController extends BaseController {
 
             $output['top_stories'] = array();
             foreach($category->getTopStories() as $key => $article) {
-                $output['top_stories'][$key] = $article->getOutput();
+                $index = str_replace('top_story_', '', $key);
+                $output['top_stories'][$index] = $article->getOutput();
             }
             RestUtils::sendResponse(
                 200, 

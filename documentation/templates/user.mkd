@@ -1,3 +1,32 @@
-# User
+<div class="page-header">
+    <h1>User <small>a user object</small></h1>
+</div>
 
-Coming soon...
+## Values:
+
+Key             | Value                     | Returns
+----            |-------                    |--------
+`user`          | Username                  | String
+`name`          | Full Name                 | String
+`info`          | JSON encoded string of ldap user info | String
+`description`   | User description          | String
+`email`         | Email address             | String
+`facebook`      | Facebook profile url      | String
+`twitter`       | Twitter handle (without @) | String
+`websitename`   | Website name              | String
+`websiteurl`    | Website url               | String
+`img`           | User image object (not used yet) | [Image Object](#image)
+
+## Example object
+    {
+        user: "felix",
+        name: "Felix",
+        info: "",
+        description: "The Felix account",
+        email: "felix@imperial.ac.uk",
+        facebook: "http://www.facebook.com/FelixImperial",
+        twitter: "feliximperial",
+        websitename: "Felix Online",
+        websiteurl: "http://felixonline.co.uk",
+        img: [image_object]
+    }

@@ -24,26 +24,18 @@ Key         | Value                 | Returns
         id: "42",
         title: "Hello World",
         teaser: "Welcome to the Felix Online API",
-        category: {
-            [category_object]
-        },
+        category: [category_object],
         date: "1317387270",
         published: "1317362400",
         hidden: "0",
         hits: "101",
         authors: [
-            {
-                [author_object]
-            },
-            {
-                [author_object]
-            }
+            [author_object],
+            [author_object]
         ],
         content: "
             ....
         ",
-        image: {
-            [image_object]    
-        },
+        image: [image_object],
         url: "http://felixonline.local/news/42/hello-world/"
     }
