@@ -15,6 +15,8 @@
     require_once("inc/api.php");
     require_once("inc/rest.php");
 
+    if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'documentation/');
+
     /*
      * Include Controllers
      */
@@ -32,12 +34,15 @@
     }
 
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
+    
+    $currentuser = new CurrentUser();
 
     /*
      * Routes
      */
     $urls = array(
         '/' => 'indexController',
+        '/docs' => 'docsController',
         '/articles' => 'articleController',
         '/articles/(?P<id>[0-9]+)' => 'articleController',
         '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController',

@@ -4,7 +4,6 @@
  */
 class indexController {
     function GET() {
-        require_once('frontpage.php');
+        require_once(API_DIRECTORY.'/documentation/frontpage.php');
     }
 }
-?>
