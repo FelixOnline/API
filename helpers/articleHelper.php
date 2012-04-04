@@ -12,7 +12,8 @@ class ArticleHelper extends BaseHelper {
         }
 
         // approved by
-        $output['approvedby'] = $this->this->getApprovedBy()->getOutput();
+        unset($output['approvedby']);
+        //$output['approvedby'] = $this->this->getApprovedBy()->getOutput();
 
         // content
         unset($output['text1']);

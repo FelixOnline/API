@@ -5,6 +5,7 @@
 class docsController {
     function GET() {
         global $currentuser;
+        require_once(API_DIRECTORY.'/documentation/markdown.php');
         require_once(API_DIRECTORY.'/documentation/docs.php');
     }
     

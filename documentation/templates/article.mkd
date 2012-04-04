@@ -1,0 +1,49 @@
+<div class="page-header">
+    <h1>Article <small>an article object</small></h1>
+</div>
+
+### Values:
+
+Key         | Value                 | Returns
+----        |-------                |--------
+`id`        | ID of article         | Int
+`title`     | Full article title    | String
+`teaser`    | Teaser text           | String
+`authors`   | Array of user objects | Array of [User Objects](#user)
+`category`  | Category object that article belongs to | [Category Object](#category)
+`date`      | Article date (Unix timestamp) | Int
+`published` | Timestamp of when article was published (Unix timestamp) | Int
+`content`   | Article content (html) | String
+`image`     | Article image object. Returns null if no image. | [Image Object](#image)
+`url`       | Article url on Felix Online | String
+`comments`  | Array of comments on article | Array
+`comment_count` | Number of comments on article | Int
+
+## Example object
+    {
+        id: "42",
+        title: "Hello World",
+        teaser: "Welcome to the Felix Online API",
+        category: {
+            [category_object]
+        },
+        date: "1317387270",
+        published: "1317362400",
+        hidden: "0",
+        hits: "101",
+        authors: [
+            {
+                [author_object]
+            },
+            {
+                [author_object]
+            }
+        ],
+        content: "
+            ....
+        ",
+        image: {
+            [image_object]    
+        },
+        url: "http://felixonline.local/news/42/hello-world/"
+    }

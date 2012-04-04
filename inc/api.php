@@ -143,6 +143,17 @@ class API {
                 )";
         return $db->query($sql);
     }
+
+    /*
+     * Render documentation template
+     *
+     * Returns html content
+     */
+    public static function render($template) {
+        $markdown = file_get_contents(API_DIRECTORY.'/documentation/templates/'.$template.'.mkd');
+        $content = Markdown($markdown);
+        return $content;
+    }
 }
 
 ?>

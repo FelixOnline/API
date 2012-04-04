@@ -3,12 +3,13 @@
 ?>
     <?php
         // section files
-        $sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
+        //$sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
+        $sections = array('article', 'image');
+        $queries = array('articles', 'category', 'article');
     ?>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -17,7 +18,6 @@
             <a class="brand" href="<?php echo API_URL; ?>docs/">
                 Felix Online API Docs 
             </a>
-            <!-- Everything you want hidden at 940px or less, place within here -->
             <div class="nav-collapse">
                 <!-- .nav, .navbar-search, .navbar-form, etc -->
                 <ul class="nav">
@@ -27,12 +27,25 @@
                         <a href="#"
                             class="dropdown-toggle"
                             data-toggle="dropdown">
-                            Contents
+                            Objects
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <?php foreach($sections as $section) { ?>
                                 <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown">
+                            Queries
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php foreach($queries as $query) { ?>
+                                <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('_', ' ', $query)); ?></a></li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -67,7 +80,10 @@
 </div>
 <div class="container">
     <section id="overview">
-        <?php require_once('sections/overview.php'); ?>
+        <div class="page-header">
+            <h1>Overview</h1>
+        </div>
+        <?php echo API::render('overview'); ?>
     </section>
     <?php if(false) { ?>
     <section id="api_key">
@@ -133,22 +149,40 @@
     </section>
     <?php } ?>
     <section id="contents">
-        <h1>Contents <strong>support</strong></h1>
+        <div class="page-header">
+            <h1>Objects</h1>
+        </div>
         <ul>
-        <?php foreach($sections as $section) { ?>
-            <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
-        <?php } ?>
+            <?php foreach($sections as $section) { ?>
+                <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
+            <?php } ?>
         </ul>
     </section>
-    <?php if(false) { ?>
     <?php foreach($sections as $section) { ?>
     <section id="<?php echo $section; ?>">
-        <?php require_once('sections/'.$section.'.php'); ?>
+        <?php echo API::render($section); ?>
     </section>
     <?php } ?>
+    <section id="call-queries">
+        <div class="page-header">
+            <h1>Queries</h1>
+        </div>
+        <ul>
+            <?php foreach($queries as $query) { ?>
+                <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('_', ' ', $query)); ?></a></li>
+            <?php } ?>
+        </ul>
+    </section>
+    <?php foreach($queries as $query) { ?>
+    <section id="<?php echo 'query-'.$query; ?>">
+        <?php echo API::render('query-'.$query); ?>
+    </section>
     <?php } ?>
     <section id="contact">
-        <?php require_once('sections/contact.php'); ?>
+        <div class="page-header">
+            <h1>Contact</h1>
+        </div>
+        <?php echo API::render('contact'); ?>
     </section>
     <footer>
         <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
