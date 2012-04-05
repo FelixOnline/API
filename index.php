@@ -51,9 +51,9 @@
         '/blog/(?P<name>[a-zA-Z0-9]+)' => 'blogController'
     );
 
-    if(defined('RELATIVE_PATH')) { // if a relative path is defined
+    if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
         try { // try mapping request to urls
-            glue::stick($urls, RELATIVE_PATH);
+            glue::stick($urls, API_RELATIVE_PATH);
         } catch (Exception $e) { // if it fails then send a 404 response
             echo $e;
             RestUtils::sendResponse(404);
