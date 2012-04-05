@@ -79,11 +79,13 @@
     </header>
 </div>
 <div class="container">
-    <section id="overview">
-        <div class="page-header">
-            <h1>Overview</h1>
+    <section id="overview" class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Overview</h1>
+            </div>
+            <?php echo API::render('overview'); ?>
         </div>
-        <?php echo API::render('overview'); ?>
     </section>
     <?php if(false) { ?>
     <section id="api_key">
@@ -148,41 +150,51 @@
         <?php } ?>
     </section>
     <?php } ?>
-    <section id="contents">
-        <div class="page-header">
-            <h1>Objects</h1>
+    <section id="contents" class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Objects</h1>
+            </div>
+            <ul>
+                <?php foreach($sections as $section) { ?>
+                    <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
+                <?php } ?>
+            </ul>
         </div>
-        <ul>
-            <?php foreach($sections as $section) { ?>
-                <li><a href="#<?php echo $section; ?>"><?php echo ucwords(str_replace('_', ' ', $section)); ?></a></li>
-            <?php } ?>
-        </ul>
     </section>
     <?php foreach($sections as $section) { ?>
-    <section id="<?php echo $section; ?>">
-        <?php echo API::render($section); ?>
+    <section id="<?php echo $section; ?>" class="row">
+        <div class="span12">
+            <?php echo API::render($section); ?>
+        </div>
     </section>
     <?php } ?>
-    <section id="call-queries">
-        <div class="page-header">
-            <h1>Queries</h1>
+    <section id="call-queries" class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Queries</h1>
+            </div>
+            <ul>
+                <?php foreach($queries as $query) { ?>
+                    <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('_', ' ', $query)); ?></a></li>
+                <?php } ?>
+            </ul>
         </div>
-        <ul>
-            <?php foreach($queries as $query) { ?>
-                <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('_', ' ', $query)); ?></a></li>
-            <?php } ?>
-        </ul>
     </section>
     <?php foreach($queries as $query) { ?>
-    <section id="<?php echo 'query-'.$query; ?>">
-        <?php echo API::render('query-'.$query); ?>
-    </section>
+        <section id="<?php echo 'query-'.$query; ?>" class="row">
+            <div class="span12">
+                <?php echo API::render('query-'.$query); ?>
+            </div>
+        </section>
     <?php } ?>
-    <section id="contact">
-        <div class="page-header">
-            <h1>Contact</h1>
+    <section id="contact" class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Contact</h1>
+            </div>
+            <?php echo API::render('contact'); ?>
         </div>
-        <?php echo API::render('contact'); ?>
     </section>
     <footer>
         <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
