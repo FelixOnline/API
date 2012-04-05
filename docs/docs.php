@@ -1,5 +1,5 @@
 <?php
-    require_once(API_DIRECTORY.'/documentation/header.php');
+    require_once(API_DIRECTORY.'/docs/header.php');
 ?>
     <?php
         // section files
@@ -200,4 +200,4 @@
         <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
     </footer>
 </div> <!--! end of #container -->
-<?php require_once(API_DIRECTORY.'/documentation/footer.php'); ?>
+<?php require_once(API_DIRECTORY.'/docs/footer.php'); ?>

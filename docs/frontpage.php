@@ -1,4 +1,4 @@
-<?php require_once(API_DIRECTORY.'/documentation/header.php'); ?>
+<?php require_once(API_DIRECTORY.'/docs/header.php'); ?>
 <div class="container frontpage">
     <div class="hero-unit">
         <h1>Felix Online API</h1>
@@ -10,4 +10,4 @@
     </footer>
 </div> <!--! end of #container -->
 
-<?php require_once(API_DIRECTORY.'/documentation/footer.php'); ?>
+<?php require_once(API_DIRECTORY.'/docs/footer.php'); ?>

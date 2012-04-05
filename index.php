@@ -16,7 +16,7 @@
     require_once("inc/rest.php");
     require_once("inc/config.inc.php");
 
-    if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'documentation/');
+    if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'docs/');
 
     /*
      * Include Controllers
@@ -43,7 +43,6 @@
      */
     $urls = array(
         '/' => 'indexController',
-        '/docs' => 'docsController',
         '/articles' => 'articleController',
         '/articles/(?P<id>[0-9]+)' => 'articleController',
         '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController',

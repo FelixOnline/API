@@ -150,7 +150,7 @@ class API {
      * Returns html content
      */
     public static function render($template) {
-        $markdown = file_get_contents(API_DIRECTORY.'/documentation/templates/'.$template.'.mkd');
+        $markdown = file_get_contents(API_DIRECTORY.'/docs/templates/'.$template.'.mkd');
         $content = Markdown($markdown);
         return $content;
     }
