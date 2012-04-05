@@ -26,6 +26,6 @@
     <!-- All JavaScript at the bottom, except this Modernizr build.
        Modernizr enables HTML5 elements & feature detects for optimal performance.
        Create your own custom Modernizr build: www.modernizr.com/download/ -->
-    <script src="js/libs/modernizr-2.5.3.min.js"></script>
+    <script src="<?php echo API_DOCS_URL;?>js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
