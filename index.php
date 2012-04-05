@@ -14,6 +14,7 @@
 	require_once(BASE_DIRECTORY.'/inc/exceptions.inc.php');
     require_once("inc/api.php");
     require_once("inc/rest.php");
+    require_once("inc/config.inc.php");
 
     if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'documentation/');
 
@@ -50,11 +51,20 @@
         '/blog/(?P<name>[a-zA-Z0-9]+)' => 'blogController'
     );
 
-    try { // try mapping request to urls
-        glue::stick($urls);
-    } catch (Exception $e) { // if it fails then send a 404 response
-        echo $e;
-        RestUtils::sendResponse(404);
+    if(defined('RELATIVE_PATH')) { // if a relative path is defined
+        try { // try mapping request to urls
+            glue::stick($urls, RELATIVE_PATH);
+        } catch (Exception $e) { // if it fails then send a 404 response
+            echo $e;
+            RestUtils::sendResponse(404);
+        }
+    } else {
+        try { // try mapping request to urls
+            glue::stick($urls);
+        } catch (Exception $e) { // if it fails then send a 404 response
+            echo $e;
+            RestUtils::sendResponse(404);
+        }
     }
 
     /*
