@@ -72,6 +72,7 @@
 	define('ARTICLE_IMG1_WIDTH',300);
 	define('ARTICLE_IMG2_WIDTH',300);
 	define('IMG_EXPIRY_HOURS',12);
+    if(!defined('IMAGE_URL')) define('IMAGE_URL', 'http://img.felixonline.co.uk/'); // image url
 
 	/* POLL */
 	define('POLL_TITLE_MIN_LENGTH',10);
