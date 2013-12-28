@@ -28,11 +28,11 @@ $app = new \SlimController\Slim(array(
     'controller.method_suffix'   => 'Action',
 ));
 
-$app->view(new \JsonApiView());
-$app->add(new \JsonApiMiddleware());
+$app->view(new \JSONView());
 
 $app->addRoutes(array(
-    '/v1/article/:id' => 'Article:index',
+    '/v1/articles/' => 'Article:index',
+    '/v1/articles/:id' => 'Article:article',
 ));
 
 

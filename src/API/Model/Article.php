@@ -9,6 +9,8 @@ class Article extends \FelixOnline\Core\Article
         'img2lr',
         'text1',
         'img1',
+        'author',
+        'approvedby',
     );
 
     public function toJSON()
@@ -18,6 +20,13 @@ class Article extends \FelixOnline\Core\Article
             if (!in_array($field, $this->hidden)) {
                 $output[$field] = $value;
             }
+        }
+
+        $output['authors'] = array();
+        $authors = $this->getAuthors();
+
+        foreach ($authors as $author) {
+            $output['authors'][] = $author->getUser();
         }
 
         $output['content'] = strip_tags($this->getContent());

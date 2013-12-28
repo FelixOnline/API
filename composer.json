@@ -17,12 +17,14 @@
     "require": {
         "slim/slim": "2.*",
         "slimcontroller/slimcontroller": "dev-master",
-        "entomb/slim-json-api": "dev-master",
         "felixonline/core": "dev-master"
     },
     "autoload": {
         "psr-0": {
             "API": "src/"
-        }
+        },
+        "classmap": [
+            "lib/JSONView.php"
+        ]
     }
 }
