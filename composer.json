@@ -1,0 +1,28 @@
+{
+    "name": "felixonline/api",
+    "description": "FelixOnline API",
+    "authors": [
+        {
+            "name": "Jonathan Kim",
+            "email": "jkimbo@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "/Users/jkimbo/code/felix/core"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "slim/slim": "2.*",
+        "slimcontroller/slimcontroller": "dev-master",
+        "entomb/slim-json-api": "dev-master",
+        "felixonline/core": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "API": "src/"
+        }
+    }
+}
