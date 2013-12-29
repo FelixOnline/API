@@ -22,6 +22,8 @@ class Article extends \FelixOnline\Core\Article
             }
         }
 
+        $output['url'] = $this->getURL();
+
         $output['authors'] = array();
         $authors = $this->getAuthors();
 

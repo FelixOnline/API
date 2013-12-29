@@ -19,6 +19,7 @@ class Comment extends \FelixOnline\Core\Comment
             }
         }
 
+        $output['url'] = $this->getURL();
         return $output;
     }
 }

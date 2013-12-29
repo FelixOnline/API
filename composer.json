@@ -7,12 +7,6 @@
             "email": "jkimbo@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "/Users/jkimbo/code/felix/core"
-        }
-    ],
     "minimum-stability": "dev",
     "require": {
         "slim/slim": "2.*",

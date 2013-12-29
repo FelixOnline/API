@@ -35,7 +35,7 @@ class JSONView extends \Slim\View {
         }
 
         $app->response()->status($status);
-        $app->response()->header('Content-Type', 'application/json');
+        $app->response()->header('Content-Type', 'application/json; charset=utf-8');
         $app->response()->body(json_encode($response));
 
         $app->stop();
