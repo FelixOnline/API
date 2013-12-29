@@ -5,6 +5,7 @@ class Article extends \SlimController\SlimController
 {
     public function indexAction()
     {
+        // Creating new article
         if ($this->app->request->isPost()) {
             // Authentication
             \API\Authentication::authenticateForRole(
@@ -45,7 +46,7 @@ class Article extends \SlimController\SlimController
             $id = $article->save();
 
             // Assign authors
-            $article->setAuthors($authors);
+            $article->addAuthors($authors);
 
             $this->app->render(200, array(
                 'id' => $id
@@ -75,6 +76,39 @@ class Article extends \SlimController\SlimController
     public function articleAction($id)
     {
         $article = new \API\Model\Article($id);
+
+        // Patching exisiting article
+        if ($this->app->request->isPatch()) {
+            // Authentication
+            \API\Authentication::authenticateForRole(
+                \API\Authentication::getUser(),
+                \API\Authentication::WEB_EDITOR
+            );
+
+            // Hack to get slim to parse form data from patch
+            $env = $this->app->environment();
+            $env['slim.method_override.original_method'] = 'POST';
+
+            $vars = $this->app->request()->post();
+
+            foreach ($vars as $param => $value) {
+                if ($param == 'content') {
+                    $article->setContent($value);
+                } else if ($param == 'authors') {
+                    $authors = array();
+                    foreach($params['authors'] as $author) {
+                        $authors[] = new \FelixOnline\Core\User($author);
+                    }
+                    $article->addAuthors($authors);
+                } else {
+                    $article->setField($param, $value);
+                }
+            }
+
+            $article->save();
+            unset($env['slim.method_override.original_method']);
+        }
+
         $this->app->render(200, $article->toJSON());
     }
 }
