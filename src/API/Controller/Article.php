@@ -106,6 +106,8 @@ class Article extends \SlimController\SlimController
             }
 
             $article->save();
+
+            // Unset hack
             unset($env['slim.method_override.original_method']);
         }
 
