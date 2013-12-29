@@ -5,24 +5,65 @@ class Article extends \SlimController\SlimController
 {
     public function indexAction()
     {
-        $articleManager = new \API\Model\ArticleManager();
+        if ($this->app->request->isPost()) {
+            // Create new article
+            $params = $this->app->request->params();
+            $required = array(
+                'title',
+                'authors',
+                'category',
+                'content',
+                'teaser',
+            );
 
-        $articles = $articleManager->filter(
-            array(
-                'published IS NOT NULL',
-                'published < NOW()',
-            ),
-            20,
-            array('published', 'DESC')
-        );
+            foreach($required as $r) {
+                if (!array_key_exists($r, $params)) {
+                    throw new \Exception('Required parameter "'.$r.'" is not defined');
+                }
+            }
 
-        $output = [];
+            // Content
+            $content = $params['content'];
+            unset($params['content']);
 
-        foreach ($articles as $article) {
-            $output[] = $article->toJSON();
+            // Authors
+            $authors = array();
+            foreach($params['authors'] as $author) {
+                $authors[] = new \FelixOnline\Core\User($author);
+            }
+            unset($params['authors']);
+
+            $article = new \FelixOnline\Core\Article();
+            $article->setFields($params);
+            $article->setContent($content);
+            $id = $article->save();
+
+            // Assign authors
+            $article->setAuthors($authors);
+
+            $this->app->render(200, array(
+                'id' => $id
+            ));
+        } else {
+            $articleManager = new \API\Model\ArticleManager();
+
+            $articles = $articleManager->filter(
+                array(
+                    'published IS NOT NULL',
+                    'published < NOW()',
+                ),
+                20,
+                array('published', 'DESC')
+            );
+
+            $output = [];
+
+            foreach ($articles as $article) {
+                $output[] = $article->toJSON();
+            }
+
+            $this->app->render(200, $output);
         }
-
-        $this->app->render(200, $output);
     }
 
     public function articleAction($id)
