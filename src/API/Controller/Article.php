@@ -6,6 +6,12 @@ class Article extends \SlimController\SlimController
     public function indexAction()
     {
         if ($this->app->request->isPost()) {
+            // Authentication
+            \API\Authentication::authenticateForRole(
+                \API\Authentication::getUser(),
+                \API\Authentication::WEB_EDITOR
+            );
+
             // Create new article
             $params = $this->app->request->params();
             $required = array(

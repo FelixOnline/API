@@ -35,7 +35,6 @@ $app->addRoutes(array(
     '/v1/articles/:id' => 'Article:article',
 ));
 
-
 // Old API
 $app->notFound(function () use ($app) {
     require __DIR__ . '/old.php';
