@@ -33,6 +33,16 @@ class Article extends \FelixOnline\Core\Article
         $output['content_html'] = $this->getContent();
         $output['image'] = $this->fields['img1'];
 
+        $output['comment_num'] = $this->getNumComments();
+
+        $comments = $this->getComments();
+
+        $output['comments'] = array();
+        foreach ($comments as $comment) {
+            $c = new \API\Model\Comment($comment->getId());
+            $output['comments'][] = $c->toJSON();
+        }
+
         return $output;
     }
 }
