@@ -3,6 +3,9 @@ namespace API\Model;
 
 class Comment extends \FelixOnline\Core\Comment
 {
+    use \API\Output\JSON;
+    use \API\Output\Hidden;
+
     protected $hidden = array(
         'ip',
         'active',
@@ -10,16 +13,21 @@ class Comment extends \FelixOnline\Core\Comment
         'spam',
     );
 
-    public function toJSON()
-    {
-        $output = array();
-        foreach ($this->fields as $field => $value) {
-            if (!in_array($field, $this->hidden)) {
-                $output[$field] = $value;
-            }
-        }
+    protected $types = array(
+        'id' => int,
+        'article' => int,
+        'timestamp' => int,
+        'reply' => int,
+        'likes' => int,
+        'dislikes' => int,
+    );
 
-        $output['url'] = $this->getURL();
+    /**
+     * Hydrate model
+     */
+    public function hydrate()
+    {
+        $this->setUrl($this->getURL());
         return $output;
     }
 }

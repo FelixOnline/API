@@ -3,6 +3,9 @@ namespace API\Model;
 
 class Article extends \FelixOnline\Core\Article
 {
+    use \API\Output\JSON;
+    use \API\Output\Hidden;
+
     protected $hidden = array(
         'text2',
         'img2',
@@ -13,38 +16,42 @@ class Article extends \FelixOnline\Core\Article
         'approvedby',
     );
 
-    public function toJSON()
+    protected $types = array(
+        'id' => int,
+        'category' => int,
+        'date' => int,
+        'published' => int,
+        'hidden' => boolean,
+        'searchable' => boolean,
+        'hits' => int,
+        'image' => int,
+        'comment_num' => int,
+    );
+
+    /**
+     * Hydrate model
+     */
+    protected function hydrate()
     {
-        $output = array();
-        foreach ($this->fields as $field => $value) {
-            if (!in_array($field, $this->hidden)) {
-                $output[$field] = $value;
-            }
+        $this->setUrl($this->getURL());
+
+        $authors = array();
+        foreach ($this->getAuthors() as $author) {
+            $authors[] = $author->getUser();
         }
+        $this->setAuthors($authors);
 
-        $output['url'] = $this->getURL();
+        $this->setContent(strip_tags($this->getContent()));
+        $this->setContentHtml($this->getContent());
+        $this->setImage($this->fields['img1']);
 
-        $output['authors'] = array();
-        $authors = $this->getAuthors();
+        $this->setCommentNum($this->getNumComments());
 
-        foreach ($authors as $author) {
-            $output['authors'][] = $author->getUser();
-        }
-
-        $output['content'] = strip_tags($this->getContent());
-        $output['content_html'] = $this->getContent();
-        $output['image'] = $this->fields['img1'];
-
-        $output['comment_num'] = $this->getNumComments();
-
-        $comments = $this->getComments();
-
-        $output['comments'] = array();
-        foreach ($comments as $comment) {
+        $comments = array();
+        foreach ($this->getComments() as $comment) {
             $c = new \API\Model\Comment($comment->getId());
-            $output['comments'][] = $c->toJSON();
+            $comments[] = $c->toJSON();
         }
-
-        return $output;
+        $this->setComments($comments);
     }
 }
