@@ -17,15 +17,15 @@ class Article extends \FelixOnline\Core\Article
     );
 
     protected $types = array(
-        'id' => int,
-        'category' => int,
-        'date' => int,
-        'published' => int,
-        'hidden' => boolean,
-        'searchable' => boolean,
-        'hits' => int,
-        'image' => int,
-        'comment_num' => int,
+        'id' => 'int',
+        'category' => 'int',
+        'date' => 'int',
+        'published' => 'int',
+        'hidden' => 'boolean',
+        'searchable' => 'boolean',
+        'hits' => 'int',
+        'image' => 'int',
+        'comment_num' => 'int',
     );
 
     /**

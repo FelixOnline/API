@@ -14,12 +14,12 @@ class Comment extends \FelixOnline\Core\Comment
     );
 
     protected $types = array(
-        'id' => int,
-        'article' => int,
-        'timestamp' => int,
-        'reply' => int,
-        'likes' => int,
-        'dislikes' => int,
+        'id' => 'int',
+        'article' => 'int',
+        'timestamp' => 'int',
+        'reply' => 'int',
+        'likes' => 'int',
+        'dislikes' => 'int',
     );
 
     /**
@@ -28,6 +28,5 @@ class Comment extends \FelixOnline\Core\Comment
     public function hydrate()
     {
         $this->setUrl($this->getURL());
-        return $output;
     }
 }
