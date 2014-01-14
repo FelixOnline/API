@@ -15,6 +15,7 @@ class ArticleTest extends DatabaseTestCase
         'comments',
         'comments_ext',
         'images',
+        'api_keys',
     );
 
     public function setUp()
@@ -29,15 +30,18 @@ class ArticleTest extends DatabaseTestCase
 
         // Reset session
         $_SESSION = array();
+
+        unset($this->app);
     }
 
-    private function setRequest($path, $query = '')
+    private function setRequest($path, $method = 'GET', $query = '', $headers = array())
     {
         // Prepare default environment variables
         \Slim\Environment::mock(array(
+            'REQUEST_METHOD' => $method,
             'PATH_INFO' => $path, //<-- Virtual
-            'QUERY_STRING' => $path,
-        ));
+            'QUERY_STRING' => $query,
+        ) + $headers);
 
         $app = new \SlimController\Slim(array(
             'controller.class_prefix'    => '\\API\\Controller',
@@ -51,6 +55,8 @@ class ArticleTest extends DatabaseTestCase
             '/v1/articles/' => 'Article:index',
             '/v1/articles/:id' => 'Article:article',
         ));
+
+        $app->setName('default');
 
         $this->app = $app;
     }
@@ -66,6 +72,7 @@ class ArticleTest extends DatabaseTestCase
         $s->call();
         list($status, $header, $body) = $s->response()->finalize();
         $this->assertEquals(200, $status);
+        $this->assertEquals($header->get('Content-Type'), 'application/json; charset=utf-8');
 
         $resp = json_decode($body, true);
 
@@ -87,5 +94,41 @@ class ArticleTest extends DatabaseTestCase
 
         $this->assertEquals($data['id'], 1);
         $this->assertEquals($data['title'], "Fighting for Libel Reform");
+    }
+
+    /**
+     * Test render with template and data
+     */
+    public function testUpdateArticle()
+    {
+        $this->setRequest('/v1/articles/1', 'PATCH', 'key=111');
+
+        $title = 'Foo Bar';
+
+        $_POST['title'] = $title;
+
+        $s = \Slim\Slim::getInstance();
+        $s->call();
+        list($status, $header, $body) = $s->response()->finalize();
+        $this->assertEquals(200, $status);
+        $this->assertEquals($header->get('Content-Type'), 'application/json; charset=utf-8');
+
+        $resp = json_decode($body, true);
+
+        $this->assertEquals($resp['error'], false);
+
+        $data = $resp['data'];
+
+        $this->assertEquals($data['id'], 1);
+        $this->assertEquals($data['title'], $title);
+
+        // query db
+        $conn = $this->getConnection();
+        $pdo = $conn->getConnection();
+
+        $statement = $pdo->prepare("SELECT title FROM article WHERE id = :id");
+        $statement->execute(array(':id' => "1"));
+        $row = $statement->fetch();
+        $this->assertEquals($row['title'], $title);
     }
 }

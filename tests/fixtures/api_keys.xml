@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="media_felix">
+	<table_data name="api_keys">
+	<row>
+		<field name="id">1</field>
+		<field name="api_key">111</field>
+		<field name="user">felix</field>
+		<field name="description">API Key</field>
+		<field name="timestamp">2011-11-06 16:33:22</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>
