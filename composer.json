@@ -1,0 +1,29 @@
+{
+    "name": "felixonline/api",
+    "description": "FelixOnline API",
+    "authors": [
+        {
+            "name": "Jonathan Kim",
+            "email": "jkimbo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "slim/slim": "2.*",
+        "slimcontroller/slimcontroller": "dev-master",
+        "felixonline/core": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/dbunit": ">=1.2",
+        "ptrofimov/xpmock": "1.1.5"
+    },
+    "autoload": {
+        "psr-0": {
+            "API": "src/"
+        },
+        "classmap": [
+            "lib/JSONView.php"
+        ]
+    }
+}

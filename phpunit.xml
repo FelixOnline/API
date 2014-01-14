@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit colors="true"
+         strict="true"
+         verbose="true">
+
+    <logging>
+        <log type="coverage-html"
+             target="tests_coverage"
+             charset="UTF-8"
+             yui="true"
+             highlight="true"
+        />
+    </logging>
+
+    <testsuite name="base">
+        <directory>tests</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">.</directory>
+            <exclude>
+                <directory suffix=".php">/usr/share/php/</directory>
+                <directory suffix=".php">tests/</directory>
+                <directory suffix=".php">vendor/</directory>
+                <directory suffix=".php">core/</directory>
+                <directory suffix=".php">docs/</directory>
+                <directory suffix=".php">inc/</directory>
+                <file>article.php</file>
+                <file>authentication.php</file>
+                <file>frontpage.php</file>
+                <file>image.php</file>
+                <file>index.php</file>
+                <file>old.php</file>
+                <file>user.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

@@ -1,39 +1,51 @@
 <?php
-	/*
-		Felix Online API
-			Author: Jonathan Kim
-			Date: 24/05/11
-			Version: 0.1
-	*/
+/**
+ * Felix API
+ */
 
-    // bootstrap Felix environment
-    require_once("core/common.inc.php");
-    require_once("inc/config.inc.php");
-    require_once("inc/const.php");
-    require_once("inc/Rest.php");
-    //require_once("inc/XmlWriter.php"); // removed because it wasn't working
+require_once __DIR__ . '/vendor/autoload.php';
 
-    $data = RestUtils::processRequest();
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-    if(!$data->getRequestVars()) { // if there are aren't any request vars then show frontpage
-        require_once('frontpage.php');
-        die();
+$config = require __DIR__ . '/inc/config.inc.php';
+
+// Felix Core setup
+$db = new \ezSQL_mysqli();
+$db->quick_connect(
+    $config['db_user'],
+    $config['db_pass'],
+    $config['db_name'],
+    array_key_exists('db_host', $config) ? $config['db_host'] : 'localhost',
+    array_key_exists('db_port', $config) ? $config['db_port'] : 3306,
+    'utf8'
+);
+
+$safesql = new \SafeSQL_MySQLi($db->dbh);
+$core = new \FelixOnline\Core\App($config, $db, $safesql);
+
+$app = new \SlimController\Slim(array(
+    'controller.class_prefix'    => '\\API\\Controller',
+    'controller.method_suffix'   => 'Action',
+));
+
+$app->view(new \JSONView());
+
+$app->addRoutes(array(
+    '/' => 'Frontpage:index',
+    '/v1/articles/' => 'Article:index',
+    '/v1/articles/:id' => 'Article:article',
+));
+
+// Old API
+$app->notFound(function () use ($app) {
+    if ($app->request->params('what')) {
+        require __DIR__ . '/old.php';
     } else {
-        // check api key
-        if(!isset($_GET['key']) || !check_key($_GET['key'])) {
-            RestUtils::sendResponse(401);
-        } else {
-            // check that there is a 'what'
-            if(!isset($_GET['what'])){
-                RestUtils::sendResponse(404);
-            } else {
-                log_api_request($_GET);
-                if(file_exists(getcwd().'/'.$_GET['what'].'.php')) {
-                    require_once($_GET['what'].'.php');
-                } else {
-                    RestUtils::sendResponse(501);
-                }
-            }
-        }
+        $app->render(404, array(
+            'error' => TRUE,
+            'msg' => 'Invalid route',
+        ));
     }
-?>
+});
+
+$app->run();
