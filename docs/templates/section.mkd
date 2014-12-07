@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>Sections <small>a section object</small></h1>
+    <h1>Section <small>a section object</small></h1>
 </div>
 
 ### Values:
