@@ -5,7 +5,7 @@
         // section files
         //$sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
         $sections = array('article', 'image', 'user');
-        $queries = array('articles', 'category', 'article');
+        $queries = array('articles', 'articles-category', 'articles-article');
     ?>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -22,7 +22,7 @@
                 <!-- .nav, .navbar-search, .navbar-form, etc -->
                 <ul class="nav">
                     <li class="active"><a href="#overview">Overview</a></li>
-                    <li><a href="#api_key">Api Keys</a></li>
+                    <!-- <li><a href="#api_key">Api Keys</a></li> -->
                     <li class="dropdown">
                         <a href="#"
                             class="dropdown-toggle"
@@ -176,7 +176,7 @@
             </div>
             <ul>
                 <?php foreach($queries as $query) { ?>
-                    <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('_', ' ', $query)); ?></a></li>
+                    <li><a href="#<?php echo 'query-'.$query; ?>"><?php echo ucwords(str_replace('-', ': ', str_replace('_', ' ', $query))); ?></a></li>
                 <?php } ?>
             </ul>
         </div>

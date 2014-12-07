@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>Image <small>an image object</small></h1>
+    <h2>Image <small>an image object</small></h2>
 </div>
 
 ## Values:

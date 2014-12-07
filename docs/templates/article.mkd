@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>Article <small>an article object</small></h1>
+    <h2>Article <small>an article object</small></h2>
 </div>
 
 ### Values:

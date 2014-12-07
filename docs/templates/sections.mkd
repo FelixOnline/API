@@ -1,0 +1,22 @@
+<div class="page-header">
+    <h1>Sections <small>a section object</small></h1>
+</div>
+
+### Values:
+
+Key           | Value                 | Returns
+----          |-------                |--------
+`id`          | ID of section         | Int
+`label`       | Main section title    | String
+`cat`         | Short section title   | String
+`email`       | Section contact email | String
+`twitter`     | Twitter handle (no @) | String
+
+## Example object
+    {
+        id: "42",
+        label: "Hello",
+        cat: "hello",
+        email: "felix@imperial.ac.uk",
+        twitter: "feliximperial"
+    }
