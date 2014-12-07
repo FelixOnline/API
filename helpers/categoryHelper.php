@@ -6,7 +6,9 @@ class CategoryHelper extends BaseHelper {
         unset($output['uri']); 
         unset($output['colourclass']); 
         unset($output['active']); 
-        unset($output['hidden']); 
+        unset($output['hidden']);
+        unset($output['description']);
+        
         $i = 1;
         for($i; $i <=4; $i++) {
             unset($output['top_slider_'.$i]); 
