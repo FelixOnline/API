@@ -8,6 +8,13 @@ class UserHelper extends BaseHelper {
         unset($output['timestamp']);
         unset($output['role']);
 
+        // images
+        $output['image'] = null;
+        if($this->this->getImage()) {
+            $image = new ImageHelper($this->this->getImage());
+            $output['image'] = $image->getOutput();
+        }
+
         return $output;
     }
 }

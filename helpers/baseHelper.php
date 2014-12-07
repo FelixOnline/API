@@ -11,6 +11,18 @@ class BaseHelper {
      * Get class output to be used in api
      */
     public function getOutput() {
-        return $this->this->getFields();
+        $fields = $this->this->getFields();
+
+        $final_fields = array();
+
+        foreach($fields as $key => $object) {
+            try {
+                $final_fields[$key] = $object->getValue();
+            } catch(\FelixOnline\Exceptions\ModelNotFoundException $e) {
+                $final_fields[$key] = null; // Foreign key does not exist
+            }
+        }
+
+        return $final_fields;
     }
 }

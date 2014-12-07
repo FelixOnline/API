@@ -8,6 +8,7 @@ class ArticleHelper extends BaseHelper {
         unset($output['author']);
         $output['authors'] = array();
         foreach($this->this->getAuthors() as $key => $author) {
+            $author = new UserHelper($author);
             $output['authors'][$key] = $author->getOutput();
         }
 
@@ -26,14 +27,26 @@ class ArticleHelper extends BaseHelper {
         unset($output['img2lr']);
         $output['image'] = null;
         if($this->this->getImage()) {
-            $output['image'] = $this->this->getImage()->getOutput();
+            $image = new ImageHelper($this->this->getImage());
+            $output['image'] = $image->getOutput();
         }
 
         // category
-        $output['category'] = $this->this->getCategory()->getOutput();
+        $category = new CategoryHelper($this->this->getCategory());
+        $output['category'] = $category->getOutput();
 
         // url
         $output['url'] = $this->this->getURL();
+
+        // number of comments
+        $output['comment_count'] = $this->this->getNumComments();
+
+        // comments
+        $output['comments'] = null;
+        foreach($this->this->getComments() as $key => $object) {
+            $object = new CommentHelper($object);
+            $output['comments'][$key] = $object->getOutput();
+        }
 
         return $output;
     }

@@ -6,22 +6,8 @@ class articleController extends BaseController {
     function GET($matches) {
         global $db;
         if(array_key_exists('id', $matches)) { // if specific article
-            $article = new Article($matches['id']);
+            $article = new ArticleHelper(new \FelixOnline\Core\Article($matches['id']));
             $output = $article->getOutput();
-            /*
-            $output = array(
-                'article_title' => $article->getTitle(),
-                'article_teaser' => $article->getTeaserFull(),
-                'article_authors' => $article->getAuthors(),
-                'article_category' => $article->getCategoryCat(),
-                'article_category_display' => $article->getCategoryLabel(),
-                'article_publish_date' => $article->getPublished(),
-                'article_image_id' => ' ',
-                'article_content' => ' ',
-                'article_url' => $article->getURL(),
-                'article_comment_num' => '',
-            );
-             */
 
             RestUtils::sendResponse(
                 200, 
@@ -29,30 +15,31 @@ class articleController extends BaseController {
                 'application/json'
             );
         } else if(array_key_exists('cat', $matches)) { // category articles
-            $category = new Category($matches['cat']);
+            try {
+                $category = (new \FelixOnline\Core\CategoryManager())
+                    ->filter('cat = "%s"', array($matches['cat']))
+                    ->one();
+            } catch (Exceptions\InternalException $e) {
+                throw new Exceptions\NotFoundException(
+                    $e->getMessage(),
+                    Exceptions\UniversalException::EXCEPTION_NOTFOUND,
+                    $e
+                );
+            }
+
             $output = array();
-            $sql = "
-                    SELECT 
-                        id 
-                    FROM 
-                        `article`
-                    WHERE
-                        category = ".$category->getId()."
-                    ORDER BY 
-                        date DESC,
-                        id DESC
-                    LIMIT 0, 10
-                ";
-            foreach($db->get_results($sql) as $key => $object) {
-                $article = new Article($object->id);
+
+            $manager = (new \FelixOnline\Core\ArticleManager())
+                ->filter('published < NOW()')
+                ->order('published', 'DESC')
+                ->filter('category = %i', array($category->getId()))
+                ->limit(0, 10);
+
+            foreach($manager->values() as $object) {
+                $article = new ArticleHelper($object);
                 $output[] = $article->getOutput();
             }
 
-            $output['top_stories'] = array();
-            foreach($category->getTopStories() as $key => $article) {
-                $index = str_replace('top_story_', '', $key);
-                $output['top_stories'][$index] = $article->getOutput();
-            }
             RestUtils::sendResponse(
                 200, 
                 json_encode($output), 
@@ -60,20 +47,17 @@ class articleController extends BaseController {
             );
         } else {
             $output = array();
-            $sql = "
-                    SELECT 
-                        id 
-                    FROM 
-                        `article`
-                    ORDER BY 
-                        date DESC,
-                        id DESC
-                    LIMIT 0, 10
-                ";
-            foreach($db->get_results($sql) as $key => $object) {
-                $article = new Article($object->id);
+
+            $manager = (new \FelixOnline\Core\ArticleManager())
+                ->filter('published < NOW()')
+                ->order('published', 'DESC')
+                ->limit(0, 10);
+
+            foreach($manager->values() as $object) {
+                $article = new ArticleHelper($object);
                 $output[] = $article->getOutput();
             }
+
             RestUtils::sendResponse(
                 200, 
                 json_encode($output), 
