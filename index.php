@@ -45,9 +45,7 @@
         '/' => 'indexController',
         '/articles' => 'articleController',
         '/articles/(?P<id>[0-9]+)' => 'articleController',
-        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController',
-        '/blog' => 'blogController',
-        '/blog/(?P<name>[a-zA-Z0-9]+)' => 'blogController'
+        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController'
     );
 
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
