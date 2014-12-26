@@ -11,6 +11,7 @@ Key           | Value                 | Returns
 `cat`         | Short section title   | String
 `email`       | Section contact email | String
 `twitter`     | Twitter handle (no @) | String
+`editors`     | Section Editors | Array of [User Objects](#user)
 
 ## Example object
     {
@@ -18,5 +19,9 @@ Key           | Value                 | Returns
         label: "Hello",
         cat: "hello",
         email: "felix@imperial.ac.uk",
-        twitter: "feliximperial"
+        twitter: "feliximperial",
+        editors: [
+            [user_object],
+            [user_object]
+        ],
     }

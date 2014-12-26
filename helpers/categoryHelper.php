@@ -14,10 +14,16 @@ class CategoryHelper extends BaseHelper {
             unset($output['top_slider_'.$i]); 
             unset($output['top_sidebar_'.$i]); 
         }
-        foreach($this->this->getTopStories() as $key => $article) {
-            $index = str_replace('top_story_', '', $key);
-            //$output['top_stories'][$index] = $article->getOutput();
+
+        $output['editors'] = array();
+
+        if($this->this->getEditors()) {
+            foreach($this->this->getEditors() as $key => $editors) {
+                $editors = new UserHelper($editors);
+                $output['editors'][$key] = $editors->getOutput();
+            }
         }
+
         return $output;
     }
 }
