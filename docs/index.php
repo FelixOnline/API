@@ -4,7 +4,6 @@
 
     // bootstrap Felix environment
     require_once(API_DIRECTORY.'/../bootstrap.php');
-	require_once(BASE_DIRECTORY.'/inc/exceptions.inc.php');
     require_once(API_DIRECTORY."/inc/api.php");
     require_once(API_DIRECTORY."/inc/rest.php");
     require_once(API_DIRECTORY."/inc/config.inc.php");

@@ -11,10 +11,11 @@
 
     // bootstrap Felix environment
     require_once(API_DIRECTORY.'/../bootstrap.php');
-	require_once(BASE_DIRECTORY.'/inc/exceptions.inc.php');
     require_once("inc/api.php");
     require_once("inc/rest.php");
     require_once("inc/config.inc.php");
+
+    use FelixOnline\Core;
 
     if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'docs/');
 
@@ -36,7 +37,7 @@
 
     //require_once("inc/XmlWriter.php"); // removed because it wasn't working
     
-    $currentuser = new CurrentUser();
+    $currentuser = new FelixOnline\Core\CurrentUser();
 
     /*
      * Routes
@@ -54,14 +55,14 @@
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
         try { // try mapping request to urls
             glue::stick($urls, API_RELATIVE_PATH);
-        } catch (Exception $e) { // if it fails then send a 404 response
+        } catch (\Exception $e) { // if it fails then send a 404 response
             echo $e;
             RestUtils::sendResponse(404);
         }
     } else {
         try { // try mapping request to urls
             glue::stick($urls);
-        } catch (Exception $e) { // if it fails then send a 404 response
+        } catch (\Exception $e) { // if it fails then send a 404 response
             echo $e;
             RestUtils::sendResponse(404);
         }
