@@ -1,0 +1,34 @@
+<div class="page-header">
+    <h2>Image <small>an image object</small></h2>
+</div>
+
+## Values:
+
+Key             | Value                     | Returns
+----            |-------                    |--------
+`id`            | ID of image               | Int
+`title`         | Title of image            | String
+`url`           | Url of image (full size)  | String
+`name`          | Filename of image         | String
+`description`   | Image description         | String
+`timestamp`     | Upload timestamp          | Int
+`caption`       | Caption                   | String
+`attribution`   | Attribution text          | String
+`attr_link`     | Attribution link          | String
+`width`         | Width of image            | Int
+`height`        | Height of image           | Int
+
+## Example object
+    {
+        id: "1376",
+        title: "best interior.jpg",
+        description: "",
+        timestamp: "1317385179",
+        caption: "Take a chance on Giraffe, or even... stick your neck out...eh, eh? I’ll get my coat",
+        attribution: "",
+        attr_link: "",
+        width: "1800",
+        height: "1200",
+        url: "http://img.felixonline.co.uk/upload/201109301319-felix-best-interior.jpg",
+        name: "201109301319-felix-best-interior.jpg"
+    }

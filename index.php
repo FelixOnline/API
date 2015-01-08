@@ -1,4 +1,6 @@
 <?php
+    use \FelixOnline\API;
+
 	/*
 		Felix Online API
 			Author: Jonathan Kim
@@ -6,13 +8,69 @@
 			Version: 0.1
 	*/
 
-    // bootstrap Felix environment
-    require_once("core/common.inc.php");
-    require_once("inc/config.inc.php");
-    require_once("inc/const.php");
-    require_once("inc/Rest.php");
-    //require_once("inc/XmlWriter.php"); // removed because it wasn't working
+    // define current working directory
+    if(!defined('API_DIRECTORY')) define('API_DIRECTORY', dirname(__FILE__));
 
+    // bootstrap Felix environment
+    require_once(API_DIRECTORY.'/../bootstrap.php');
+    require_once("inc/api.php");
+    require_once("inc/rest.php");
+    require_once("inc/config.inc.php");
+
+    use FelixOnline\Core;
+
+    if(!defined('API_DOCS_URL')) define('API_DOCS_URL', API_URL.'docs/');
+
+    /*
+     * Include Controllers
+     */
+    require_once(API_DIRECTORY.'/controllers/baseController.php');
+    foreach (glob(API_DIRECTORY.'/controllers/*.php') as $filename) {
+        require_once($filename);
+    }
+
+    /*
+     * Include Helpers
+     */
+    require_once(API_DIRECTORY.'/helpers/baseHelper.php');
+    foreach (glob(API_DIRECTORY.'/helpers/*.php') as $filename) {
+        require_once($filename);
+    }
+
+    //require_once("inc/XmlWriter.php"); // removed because it wasn't working
+    
+    $currentuser = new FelixOnline\Core\CurrentUser();
+
+    /*
+     * Routes
+     */
+    $urls = array(
+        '/' => 'FelixOnline\API\indexController',
+        '/articles' => 'FelixOnline\API\articleController',
+        '/articles/(?P<id>[0-9]+)' => 'FelixOnline\API\articleController',
+        '/articles/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\articleController',
+        '/sections' => 'FelixOnline\API\categoryController',
+        '/sections/(?P<id>[0-9]+)' => 'FelixOnline\API\categoryController',
+        '/sections/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\categoryController'
+    );
+
+    if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
+        try { // try mapping request to urls
+            glue::stick($urls, API_RELATIVE_PATH);
+        } catch (\Exception $e) { // if it fails then send a 404 response
+            echo $e;
+            RestUtils::sendResponse(404);
+        }
+    } else {
+        try { // try mapping request to urls
+            glue::stick($urls);
+        } catch (\Exception $e) { // if it fails then send a 404 response
+            echo $e;
+            RestUtils::sendResponse(404);
+        }
+    }
+
+    /*
     $data = RestUtils::processRequest();
 
     if(!$data->getRequestVars()) { // if there are aren't any request vars then show frontpage
@@ -36,4 +94,5 @@
             }
         }
     }
+     */
 ?>

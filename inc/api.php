@@ -1,4 +1,6 @@
 <?php
+namespace FelixOnline\API;
+
 /*
  * API Utility class
  * Author: Jonathan Kim
@@ -119,17 +121,36 @@ class API {
      *      $get - $_GET array from request
      *
      */
-    public static function log_api_request($get) {
+    public static function log_api_request($class) {
         global $db;
-        $key = $db->escape($get['key']);
-        $sql = "SELECT * FROM `api_keys` WHERE api_key='".$key."'";
-        $user = $db->get_row($sql);
+        //$key = $db->escape($get['key']);
+        //$sql = "SELECT * FROM `api_keys` WHERE api_key='".$key."'";
+        //$user = $db->get_row($sql);
 
-        $what = $get['what']; 
-        $request = json_encode($get);
-        $sql = "INSERT INTO `api_log` (user_id,what,request,timestamp) VALUES ('".$user->id."','$what','$request',NOW())";
-        
+        //$what = $get['what']; 
+        //$request = json_encode($get);
+        $sql = "INSERT INTO `api_log` 
+                (
+                    what,
+                    request,
+                    timestamp
+                ) VALUES (
+                    '".$class."',
+                    '".json_encode($_SERVER)."',
+                    NOW()
+                )";
         return $db->query($sql);
+    }
+
+    /*
+     * Render documentation template
+     *
+     * Returns html content
+     */
+    public static function render($template) {
+        $markdown = file_get_contents(API_DIRECTORY.'/docs/templates/'.$template.'.mkd');
+        $content = Markdown($markdown);
+        return $content;
     }
 }
 
