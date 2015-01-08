@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class CommentHelper extends BaseHelper {
     public function getOutput() {

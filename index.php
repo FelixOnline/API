@@ -1,4 +1,6 @@
 <?php
+    use \FelixOnline\API;
+
 	/*
 		Felix Online API
 			Author: Jonathan Kim
@@ -43,13 +45,13 @@
      * Routes
      */
     $urls = array(
-        '/' => 'indexController',
-        '/articles' => 'articleController',
-        '/articles/(?P<id>[0-9]+)' => 'articleController',
-        '/articles/(?P<cat>[a-zA-Z]+)' => 'articleController',
-        '/sections' => 'categoryController',
-        '/sections/(?P<id>[0-9]+)' => 'categoryController',
-        '/sections/(?P<cat>[a-zA-Z]+)' => 'categoryController'
+        '/' => 'FelixOnline\API\indexController',
+        '/articles' => 'FelixOnline\API\articleController',
+        '/articles/(?P<id>[0-9]+)' => 'FelixOnline\API\articleController',
+        '/articles/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\articleController',
+        '/sections' => 'FelixOnline\API\categoryController',
+        '/sections/(?P<id>[0-9]+)' => 'FelixOnline\API\categoryController',
+        '/sections/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\categoryController'
     );
 
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined

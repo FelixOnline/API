@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class ArticleHelper extends BaseHelper {
     public function getOutput() {

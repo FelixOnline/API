@@ -1,4 +1,6 @@
 <?php
+    use \FelixOnline\API\API;
+
     require_once(API_DIRECTORY.'/docs/header.php');
 ?>
     <?php

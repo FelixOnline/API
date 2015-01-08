@@ -1,4 +1,6 @@
 <?php
+namespace FelixOnline\API;
+
 /*
  * API Utility class
  * Author: Jonathan Kim

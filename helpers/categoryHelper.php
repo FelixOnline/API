@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class CategoryHelper extends BaseHelper {
     public function getOutput() {

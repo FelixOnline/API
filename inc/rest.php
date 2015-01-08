@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class RestUtils {
     public static function processRequest() {

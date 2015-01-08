@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class ImageHelper extends BaseHelper {
     public function getOutput() {

@@ -1,4 +1,5 @@
 <?php
+namespace FelixOnline\API;
 
 class BaseHelper {
     protected $this;
