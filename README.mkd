@@ -1,3 +1,2 @@
 # Felix Online API + Docs
 
-# Active development has moved to `gluephp` branch
