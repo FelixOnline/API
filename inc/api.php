@@ -56,6 +56,27 @@ class API {
         $content = Markdown($markdown);
         return $content;
     }
+    /*
+     * Generate an exception error
+     */
+    public static function error($code, $message, $e, $log_error = false) {
+        $output = array();
+        $output['error'] = 1;
+        $output['error_code'] = $code;
+        $output['message'] = $message;
+
+        RestUtils::sendResponse(
+            $code, 
+            json_encode($output), 
+            'application/json'
+        );
+
+        if($log_error) {
+            $sentry = new \Raven_Client(API_SENTRY_DSN);
+
+            $sentry->captureException($exception);
+        }
+    }
 }
 
 ?>
