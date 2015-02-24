@@ -53,7 +53,11 @@
         '/sections/(?P<id>[0-9]+)' => 'FelixOnline\API\categoryController',
         '/sections/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\categoryController',
         '/frontpage' => 'FelixOnline\API\frontpageController',
-        '/frontpage/(?P<sec>[a-zA-Z0-9]+)' => 'FelixOnline\API\frontpageController'
+        '/frontpage/(?P<sec>[a-zA-Z0-9]+)' => 'FelixOnline\API\frontpageController',
+        '/archive' => 'FelixOnline\API\archiveController',
+        '/archive/(?P<pub>[0-9]+)' => 'FelixOnline\API\archiveController',
+        '/archive/latest/(?P<latest>[0-9]+)' => 'FelixOnline\API\archiveController',
+        '/archive/issue/(?P<id>[0-9]+)' => 'FelixOnline\API\archiveController'
     );
 
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
