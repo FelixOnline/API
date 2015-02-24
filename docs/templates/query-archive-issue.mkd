@@ -1,0 +1,11 @@
+<div class="page-header">
+    <h2>Archive: Latest Issue <small><code>http://api.felixonline.co.uk/archive/issue/:id</code></small></h2>
+</div>
+
+Returns the extended form of the Issue object for the specified issue. The ID refers to the issue ID which may not be the same as the issue number.
+
+## Example call:
+`http://api.felixonline.co.uk/archive/latest/1`
+
+## Example response:
+    [issue_object] - extended

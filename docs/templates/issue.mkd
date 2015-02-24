@@ -1,0 +1,38 @@
+<div class="page-header">
+    <h2>Issue <small>an object relating to an issue PDF</small></h2>
+</div>
+
+## Values:
+
+Key             | Value                                                    | Returns
+----            |-------                                                   |--------
+`id`            | ID of issue (not the same as issue number)               | Int
+`pub_date`      | Date of publication in format YYYY-MM-DD                 | String
+`issue_no`      | Issue number                                             | Int
+`pub_no`        | Publication number (will become object in future)        | Int
+`description`   | PDF description (usually blank)                          | String
+`year`          | Year issue was published (for pagination)                | Int
+`url`           | Link to issue page (pages are currently inactive)        | String
+`download_url`  | Link to download the PDF                                 | String
+`thumbnail_url` | Link to a PNG of the thumbnail (size may vary)*          | String
+`thumbnail`     | Original thumbnail filename*                             | String
+`file-url`      | File and folder of PDF in archive system*                | String
+`file`          | Original file name*                                      | String
+
+Items marked * are only shown in 'extended' outputs, see queries section. The 'simple' form of the object does not include the items with * by their description as this would significantly slow down the API.
+
+## Example object
+    {
+		"id": "1",
+		"pub_date": "1949-12-09",
+		"issue_no": "1",
+		"pub_no": "1",
+		"description": "",
+		"year": "1949",
+		"url": "http:\/\/felix.local\/issuearchive\/issue\/1",
+		"download_url": "http:\/\/felix.local\/issuearchive\/issue\/1\/download",
+		"thumbnail-url": "http:\/\/felixonline.co.uk\/archive\/thumbs\/1949_0001_A.png",
+		"thumbnail": "1949_0001_A.png",
+		"file-url": "IC_1949\/1949_0001_A.pdf",
+		"file": "1949_0001.pdf"
+    }

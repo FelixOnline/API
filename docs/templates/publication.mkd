@@ -1,0 +1,16 @@
+<div class="page-header">
+    <h2>Publication <small>the object which archive issues are organised within</small></h2>
+</div>
+
+## Values:
+
+Key             | Value                           | Returns
+----            |-------                          |--------
+`id`            | ID of publication               | Int
+`title`         | The publication title           | String
+
+## Example object
+    {
+        id: 1,
+        title: "Felix"
+    }

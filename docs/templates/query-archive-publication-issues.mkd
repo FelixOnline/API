@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h2>Archive: Publication Issues <small><code>http://api.felixonline.co.uk/archive/:pubid</code></small></h2>
+</div>
+
+Returns the simple issue object format for all issues in a publication. This can be quite slow if a publication has a lot of issues.
+
+## Example call:
+`http://api.felixonline.co.uk/archive/1`
+
+## Example response:
+    {
+        [issue_object] - simple,
+        [issue_object] - simple,
+        ...
+    }
