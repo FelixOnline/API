@@ -56,6 +56,21 @@ class API {
         $content = Markdown($markdown);
         return $content;
     }
+
+    /*
+     * Output the response with correct code and format
+     * Just json for now
+     */
+    public static function output(array $data) {
+        $data = array_merge(array('error' => 0), $data);
+
+        RestUtils::sendResponse(
+            200, 
+            json_encode($data), 
+            'application/json'
+        );
+    }
+
     /*
      * Generate an exception error
      */

@@ -11,10 +11,8 @@ class categoryController extends BaseController {
             $category = new CategoryHelper(new \FelixOnline\Core\Category($matches['id']));
             $output = $category->getOutput();
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         } else if(array_key_exists('cat', $matches)) { // if specific section - by cat name
             try {
@@ -32,10 +30,8 @@ class categoryController extends BaseController {
             $category = new CategoryHelper($category);
             $output = $category->getOutput();
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         } else {
             $output = array();
@@ -51,10 +47,8 @@ class categoryController extends BaseController {
                 $output[] = $category->getOutput();
             }
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         }
     }

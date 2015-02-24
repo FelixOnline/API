@@ -11,10 +11,8 @@ class articleController extends BaseController {
             $article = new ArticleHelper(new \FelixOnline\Core\Article($matches['id']));
             $output = $article->getOutput();
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         } else if(array_key_exists('cat', $matches)) { // category articles
             try {
@@ -42,10 +40,8 @@ class articleController extends BaseController {
                 $output[] = $article->getOutput();
             }
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         } else {
             $output = array();
@@ -60,10 +56,8 @@ class articleController extends BaseController {
                 $output[] = $article->getOutput();
             }
 
-            RestUtils::sendResponse(
-                200, 
-                json_encode($output), 
-                'application/json'
+            API::output(
+                $output
             );
         }
     }
