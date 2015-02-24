@@ -9,7 +9,7 @@ Returns all articles in a front page section. The list of sections is not advert
 
 ## Example response:
     {
-        0: [frontpage_object],
-        1: [frontpage_object],
+        [frontpage_object],
+        [frontpage_object],
         ...
     }
