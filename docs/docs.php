@@ -6,8 +6,8 @@
     <?php
         // section files
         //$sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
-        $sections = array('article', 'image', 'user', 'section');
-        $queries = array('articles', 'articles-category', 'articles-article');
+        $sections = array('article', 'image', 'user', 'section', 'frontpage');
+        $queries = array('articles', 'articles-category', 'articles-article', 'frontpage', 'frontpage-section');
     ?>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">

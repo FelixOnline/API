@@ -1,4 +1,20 @@
-# Frontpage
+<div class="page-header">
+    <h2>Frontpage <small>a frontpage item object</small></h2>
+</div>
 
-Coming soon...
+## Values:
 
+Key             | Value                           | Returns
+----            |-------                          |--------
+`id`            | ID of item                      | Int
+`article`       | The article                     | An [Article Object](#article)
+`section`       | Name of the front page section  | String
+`sort_order`    | The order that the item shows   | Int
+
+## Example object
+    {
+        id: "1376",
+        section: "featured",
+        sort_order: 0,
+        article: [article_object]
+    }

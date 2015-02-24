@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h2>Specific Frontpage Section <small><code>http://api.felixonline.co.uk/frontpage/:section</code></small></h2>
+</div>
+
+Returns all articles in a front page section. The list of sections is not advertised but can be found through querying the front page end point directly.
+
+## Example call:
+`http://api.felixonline.co.uk/frontpage/featured`
+
+## Example response:
+    {
+        0: [frontpage_object],
+        1: [frontpage_object],
+        ...
+    }
