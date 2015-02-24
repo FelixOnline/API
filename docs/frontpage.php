@@ -6,7 +6,7 @@
         <a href="<?php echo API_URL; ?>docs/" class="btn btn-primary btn-large" id="docbutton">Documentation &raquo;</a>
     </div>
     <footer>
-        <p>Copyright &copy; Felix  2011</p>
+        <p>Copyright &copy; Felix. API Version <?php echo API_VERSION; ?>.</p>
     </footer>
 </div> <!--! end of #container -->
 

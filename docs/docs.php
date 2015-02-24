@@ -136,7 +136,7 @@
         </div>
     </section>
     <footer>
-        <p>Copyright &copy; Felix  2011 <a href="#">Top of page</a></p>
+        <p>Copyright &copy; Felix. API Version <?php echo API_VERSION; ?>. <a href="#">Top of page</a></p>
     </footer>
 </div> <!--! end of #container -->
 <?php require_once(API_DIRECTORY.'/docs/footer.php'); ?>

@@ -46,6 +46,7 @@
      */
     $urls = array(
         '/' => 'FelixOnline\API\indexController',
+        '/version' => 'FelixOnline\API\versionController',
         '/articles' => 'FelixOnline\API\articleController',
         '/articles/(?P<id>[0-9]+)' => 'FelixOnline\API\articleController',
         '/articles/(?P<cat>[a-zA-Z]+)' => 'FelixOnline\API\articleController',

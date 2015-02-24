@@ -1,1 +1,1 @@
-The API documentation is maintained by Jonathan Kim. You can find me on [twitter](http://twitter.com/#!/jonnykim) or by emailing me at <jk708@imperial.ac.uk>
+The API documentation is maintained by Philip Kent. You can file bug reports and feature requests online at: https://github.com/FelixOnline/API. Pull requests and contributions are always welcome.

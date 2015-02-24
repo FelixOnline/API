@@ -1,6 +1,8 @@
 <?php
 namespace FelixOnline\API;
 
+define('API_VERSION', 0.2);
+
 /*
  * API Utility class
  * Author: Jonathan Kim
@@ -62,7 +64,20 @@ class API {
      * Just json for now
      */
     public static function output(array $data) {
-        $data = array_merge(array('error' => 0), $data);
+        $data = array('error' => 0, 'output' => $data);
+
+        RestUtils::sendResponse(
+            200, 
+            json_encode($data), 
+            'application/json'
+        );
+    }
+
+    /*
+     * Outputs version number
+     */
+    public static function version() {
+        $data = array('version' => API_VERSION, 'name' => 'Felix Online API', 'copyright' => '(c) Felix');
 
         RestUtils::sendResponse(
             200, 
