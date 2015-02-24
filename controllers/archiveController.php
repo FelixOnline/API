@@ -79,8 +79,13 @@ class archiveController extends BaseController {
             $pubs = new \FelixOnline\Core\IssueManager();
             $pubs = $pubs->getPublications();
 
+            $output = array();
+            foreach($pubs as $id => $pub) {
+                $output[] = array('id' => $id, 'title' => $pub);
+            }
+
             API::output(
-                $pubs
+                $output
             );
         }
     }
