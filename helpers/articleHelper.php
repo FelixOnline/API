@@ -20,7 +20,21 @@ class ArticleHelper extends BaseHelper {
         // content
         unset($output['text1']);
         unset($output['text2']);
-        $output['content'] = $this->this->getContent();
+
+        $converter = new \Sioen\Converter();
+
+        $text = preg_replace('/<p[^>]*><\\/p[^>]*>/i', '', $converter->toHTML($this->this->getContent()));
+        $text = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $text); // Some <p>^B</p> tags can get through some times
+
+        // More text tidying
+        $text = strip_tags($text, '<p><a><div><b><i><br><blockquote><object><param><embed><li><ul><ol><strong><img><h1><h2><h3><h4><h5><h6><em><iframe><strike>'); // Gets rid of html tags except <p><a><div>
+        $text = preg_replace('/(<br(| |\/|( \/))>)/i', '', $text); // strip br tag
+        $text = preg_replace('#<div[^>]*(?:/>|>(?:\s|&nbsp;)*</div>)#im', '', $text); // Removes empty html div tags
+        $text = preg_replace('#<span*(?:/>|>(?:\s|&nbsp;)[^>]*</span>)#im', '', $text); // Removes empty html span tags
+        $text = preg_replace('#<p[^>]*(?:/>|>(?:\s|&nbsp;)*</p>)#im', '', $text); // Removes empty html p tags
+        $output['content'] = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $text); // Remove style attributes
+
+        $output['raw_content'] = $this->this->getContent();
 
         // image
         unset($output['img1']);

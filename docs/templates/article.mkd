@@ -14,10 +14,28 @@ Key         | Value                 | Returns
 `date`      | Article date (Unix timestamp) | Int
 `published` | Timestamp of when article was published (Unix timestamp) | Int
 `content`   | Article content (html) | String
+`raw_content` | Article content (json) as output by Sir Trevor | String
 `image`     | Article image object. Returns null if no image. | [Image Object](#image)
 `url`       | Article url on Felix Online | String
 `comments`  | Array of comments on article | Array
 `comment_count` | Number of comments on article | Int
+
+## Raw Content
+For advanced uses you may want to access this.
+
+The content is built up of a number of components.
+
+These components contain a type and then some data.
+
+For text, heading, and list components, the text is stored in Markdown and roughly corresponds to one text component per paragraph.
+
+Block quotes contain the text in Markdown, and an attribution under the cite parameter.
+
+Videos have a source (e.g. YouTube) and a video ID number.
+
+Images have a URI.
+
+Finally, FelixImages contain an ID number for the image for fetching from the Image endpoint (see the [Image Object](#image)), a caption, and an attribution. These should be used in preference to that obtained from the Image endpoint.
 
 ## Example object
     {
@@ -34,6 +52,9 @@ Key         | Value                 | Returns
             [author_object]
         ],
         content: "
+            ....
+        ",
+        raw_content: "
             ....
         ",
         image: [image_object],
