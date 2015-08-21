@@ -1,13 +1,6 @@
 <?php
     use \FelixOnline\API;
 
-	/*
-		Felix Online API
-			Author: Jonathan Kim
-			Date: 24/05/11
-			Version: 0.1
-	*/
-
     // define current working directory
     if(!defined('API_DIRECTORY')) define('API_DIRECTORY', dirname(__FILE__));
 
