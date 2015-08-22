@@ -7,3 +7,25 @@ This converts Felix Online Core models into JSON endpoints through use of some s
 This must be installed as a subdirectory of the main site. Currently a completely isolated API install is not supported.
 
 Once this is done, simply set up a config file in inc as appropriate, following the template as instruction.
+
+## How to add more endpoints
+
+An endpoint requires a controller which fetches the data according to the URL given and renders it.
+
+For example, a controller may have different cases for when an ID number is specified or not.
+
+An endpoint is hooked into the API by setting a route in index.php. This lets you set placeholders such as
+
+```
+(P<abc>[regexp])
+```
+
+which will allocate the key "abc" in $matches in the controller according to what is specified in the URL that matches the regular expression. Because of differing regexps, you can have different actions in a controller for the same URL - for example if numbers or letters are specified.
+
+Most controllers parse the models from Core through a Helper which trims out unnecessary fields and applies any transformations to get the right JSON output. For example, foreign keys may require conversion to JSON.
+
+Then, the API class is used to render the response.
+
+Note that all helpers/controllers should render a PHP Array, this is converted to JSON (or perhaps one day XML) by the API class.
+
+Authenticated endpoints are not currently supported.
