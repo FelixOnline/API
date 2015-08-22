@@ -1,2 +1,9 @@
 # Felix Online API + Docs
 
+This converts Felix Online Core models into JSON endpoints through use of some simple mapping and model manipulation code
+
+## Installation
+
+This must be installed as a subdirectory of the main site. Currently a completely isolated API install is not supported.
+
+Once this is done, simply set up a config file in inc as appropriate, following the template as instruction.
