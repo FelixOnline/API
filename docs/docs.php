@@ -6,7 +6,7 @@
     <?php
         // section files
         //$sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
-        $sections = array('article', 'image', 'user', 'section', 'frontpage', 'publication', 'issue');
+        $sections = array('article', 'comments', 'image', 'user', 'section', 'frontpage', 'publication', 'issue');
         $queries = array('articles', 'articles-category', 'articles-article', 'frontpage', 'frontpage-section', 'archive-publication', 'archive-publication-issues', 'archive-latest', 'archive-issue');
     ?>
 <div class="navbar navbar-fixed-top">

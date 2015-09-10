@@ -61,6 +61,7 @@ class ArticleHelper extends BaseHelper {
         }
 
         unset($output['comment_status']);
+        unset($output['searchable']);
 
         return $output;
     }

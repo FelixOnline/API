@@ -1,4 +1,26 @@
-# Comments
+<div class="page-header">
+    <h2>Comments <small>a comment object</small></h2>
+</div>
 
-Coming soon...
+## Values:
 
+Key             | Value                           | Returns
+----            |-------                          |--------
+`id`            | ID of item                      | Int
+`name`       | Commenter name                     | String
+`comment`       | The comment  | String
+`timestamp`    | Creation posix timestamp   | Int
+`reply` | Comment object this is a reply to OR null | Comment object (this)
+`likes` | Number of likes | Int
+`dislikes` | Number of dislikes | Int
+
+## Example object
+	{
+		"name":"Someone",
+		"comment":"blah blah blah",
+		"timestamp":1441648260,
+		"reply":null,
+		"likes":"0",
+		"dislikes":"0",
+		"id":"1234"
+	}
