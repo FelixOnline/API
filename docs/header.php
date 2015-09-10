@@ -8,8 +8,8 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Felix Online API Documentation</title>
-    <meta name="description" content="The Felix Online API documentation">
+    <title><?php echo API_NAME; ?> Documentation</title>
+    <meta name="description" content="The <?php echo API_NAME; ?> documentation">
     <meta name="author" content="Jonathan Kim">
 
     <!-- Mobile viewport optimized: h5bp.com/viewport -->

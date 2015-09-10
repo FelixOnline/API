@@ -1,7 +1,9 @@
 <?php
 namespace FelixOnline\API;
 
-define('API_VERSION', 0.2);
+define('API_VERSION', 0.3);
+if(!defined('API_NAME')): define('API_NAME', 'Felix Online API'); endif;
+if(!defined('API_COPYRIGHT')): define('API_COPYRIGHT', '(c) Felix Online'); endif;
 
 /*
  * API Utility class
@@ -77,7 +79,7 @@ class API {
      * Outputs version number
      */
     public static function version() {
-        $data = array('version' => API_VERSION, 'name' => 'Felix Online API', 'copyright' => '(c) Felix');
+        $data = array('version' => API_VERSION, 'name' => API_NAME, 'copyright' => API_COPYRIGHT);
 
         RestUtils::sendResponse(
             200, 

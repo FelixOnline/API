@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" href="<?php echo API_URL; ?>docs/">
-                Felix Online API Docs 
+                <?php echo API_NAME; ?> Docs 
             </a>
             <div class="nav-collapse">
                 <!-- .nav, .navbar-search, .navbar-form, etc -->
@@ -76,7 +76,7 @@
                 <?php } ?>
 <div id="header_cont">
     <header>
-        <h1>Welcome to the Felix Online API Documentation</h1>
+        <h1>Welcome to the <?php echo API_NAME; ?> Documentation</h1>
         <p>Make yourself at home. If you have any questions then please do <a href="#contact">contact us</a>.</p>
     </header>
 </div>
@@ -136,7 +136,7 @@
         </div>
     </section>
     <footer>
-        <p>Copyright &copy; Felix. API Version <?php echo API_VERSION; ?>. <a href="#">Top of page</a></p>
+        <p><?php echo API_COPYRIGHT; ?>. API Version <?php echo API_VERSION; ?>. <a href="#">Top of page</a></p>
     </footer>
 </div> <!--! end of #container -->
 <?php require_once(API_DIRECTORY.'/docs/footer.php'); ?>

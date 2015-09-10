@@ -1,4 +1,4 @@
-This is the documentation for Felix Online API. It is a work in progress at the moment so please bear with us. Any features that are working will be clearly marked as such, as well as any that aren't!
+This is the documentation for this API. It is a work in progress at the moment so please bear with us. Any features that are working will be clearly marked as such, as well as any that aren't!
 
 Note: We only support JSON output format at the moment.
 
@@ -11,6 +11,6 @@ All API calls contain a field "error" which is 0 if the request was succesful, o
 You can check what version of the API is running on the server by going to the endpoint "/version", this will report in the format of:
     {
         version: 0.2,
-        name: "Felix Online API",
-        copyright: "(c) Felix"
+        name: "Name API",
+        copyright: "(c) Name Corp"
     }

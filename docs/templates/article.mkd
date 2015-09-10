@@ -41,7 +41,7 @@ Finally, FelixImages contain an ID number for the image for fetching from the Im
     {
         id: "42",
         title: "Hello World",
-        teaser: "Welcome to the Felix Online API",
+        teaser: "Welcome to the Name API",
         category: [category_object],
         date: "1317387270",
         published: "1317362400",
