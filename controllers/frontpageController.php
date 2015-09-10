@@ -1,6 +1,8 @@
 <?php
 namespace FelixOnline\API;
 
+use \FelixOnline\Exceptions;
+
 /*
  * Frontpage Controller
  */
@@ -11,11 +13,19 @@ class frontpageController extends BaseController {
             try {
                 $sec = new \FelixOnline\Core\FrontpageManager();
                 $sec = $sec->getSection($matches['sec']);
-            } catch (Exceptions\InternalException $e) {
-                throw new Exceptions\NotFoundException(
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
                     $e->getMessage(),
-                    Exceptions\UniversalException::EXCEPTION_NOTFOUND,
-                    $e
+                    $matches,
+                    'API-FrontpageController'
+                );
+            }
+
+            if(!$sec) {
+                throw new \NotFoundException(
+                    "No articles found",
+                    $matches,
+                    'API-FrontpageController'
                 );
             }
 
@@ -29,13 +39,13 @@ class frontpageController extends BaseController {
             );
         } else {
             try {
-                $sec = \FelixOnline\Core\BaseManager::build('\FelixOnline\Core\Frontpage', 'frontpage');
-                $sec = $sec->values();
-            } catch (Exceptions\InternalException $e) {
-                throw new Exceptions\NotFoundException(
+                $sec = new \FelixOnline\Core\FrontpageManager();
+                $sec = $sec->getAll();
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
                     $e->getMessage(),
-                    Exceptions\UniversalException::EXCEPTION_NOTFOUND,
-                    $e
+                    array(),
+                    'API-FrontpageController'
                 );
             }
 

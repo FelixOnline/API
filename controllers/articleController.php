@@ -8,7 +8,13 @@ class articleController extends BaseController {
     function GET($matches) {
         global $db;
         if(array_key_exists('id', $matches)) { // if specific article
-            $article = new ArticleHelper(new \FelixOnline\Core\Article($matches['id']));
+            $art = new \FelixOnline\Core\Article($matches['id']);
+            $article = new ArticleHelper($art);
+
+            if($art->getCategory()->getSecret()) {
+                throw new \Exception('No model in database');
+            }
+
             $output = $article->getOutput();
 
             API::output(
@@ -18,6 +24,7 @@ class articleController extends BaseController {
             try {
                 $category = (new \FelixOnline\Core\CategoryManager())
                     ->filter('cat = "%s"', array($matches['cat']))
+                    ->filter('secret = 0') // API for now does not support authentication
                     ->one();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
