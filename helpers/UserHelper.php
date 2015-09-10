@@ -9,6 +9,17 @@ class UserHelper extends BaseHelper {
         unset($output['timestamp']);
         unset($output['role']);
 
+        if(!$this->this->getShowLdap()) {
+            unset($output['info']);
+        }
+
+        if(!$this->this->getShowEmail()) {
+            unset($output['email']);
+        }
+
+        unset($output['show_email']);
+        unset($output['show_ldap']);
+
         // images
         $output['image'] = null;
         if($this->this->getImage()) {

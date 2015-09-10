@@ -11,9 +11,6 @@ class ImageHelper extends BaseHelper {
 
         unset($output['user']);
 
-        unset($output['v_offset']);
-        unset($output['h_offset']);
-
         return $output;
     }
 }

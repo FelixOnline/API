@@ -19,7 +19,6 @@ class ArticleHelper extends BaseHelper {
 
         // content
         unset($output['text1']);
-        unset($output['text2']);
 
         $converter = new \Sioen\Converter();
 
@@ -38,8 +37,6 @@ class ArticleHelper extends BaseHelper {
 
         // image
         unset($output['img1']);
-        unset($output['img2']);
-        unset($output['img2lr']);
         $output['image'] = null;
         if($this->this->getImage()) {
             $image = new ImageHelper($this->this->getImage());
@@ -62,6 +59,8 @@ class ArticleHelper extends BaseHelper {
             $object = new CommentHelper($object);
             $output['comments'][$key] = $object->getOutput();
         }
+
+        unset($output['comment_status']);
 
         return $output;
     }

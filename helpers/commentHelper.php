@@ -14,13 +14,7 @@ class CommentHelper extends BaseHelper {
         unset($output['active']);
         unset($output['pending']);
         unset($output['spam']);
-
-        // user
-        if($output['user']) {
-            $object = new UserHelper($this->this->getUser());
-            $output['name'] = $object->getOutput()['name'];
-            unset($output['user']);
-        }
+        unset($output['user']);
 
         // reply
         if($output['reply']) {

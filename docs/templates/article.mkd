@@ -19,6 +19,7 @@ Key         | Value                 | Returns
 `url`       | Article url on Felix Online | String
 `comments`  | Array of comments on article | Array
 `comment_count` | Number of comments on article | Int
+`img_caption` | Caption for the image | String
 
 ## Raw Content
 For advanced uses you may want to access this.
@@ -58,5 +59,6 @@ Finally, FelixImages contain an ID number for the image for fetching from the Im
             ....
         ",
         image: [image_object],
-        url: "http://felixonline.local/news/42/hello-world/"
+        url: "http://felixonline.local/news/42/hello-world/",
+        img_caption: "A cat"
     }
