@@ -5,7 +5,7 @@
 Returns the extended form of the Issue object for the specified issue. The ID refers to the issue ID which may not be the same as the issue number.
 
 ## Example call:
-`http://api.felixonline.co.uk/archive/latest/1`
+`http://api.felixonline.co.uk/archive/issue/1`
 
 ## Example response:
     [issue_object] - extended

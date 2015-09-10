@@ -6,62 +6,69 @@ namespace FelixOnline\API;
  */
 class archiveController extends BaseController {
     function GET($matches) {
-        global $dba;
-        global $db;
-
-
-        $dbaname = ARCHIVE_DATABASE;
-
-        $dba = new \ezSQL_mysqli();
-        $dba->quick_connect(
-            $db->dbuser,
-            $db->dbpassword,
-            $dbaname,
-            $db->dbhost,
-            3306,
-            'utf8'
-        );
-        $this->safesql = new \SafeSQL_MySQLi($dba->dbh);
-        $dba->cache_timeout = 24; // Note: this is hours
-        $dba->use_disk_cache = true;
-        $dba->cache_dir = 'inc/ezsql_cache'; // Specify a cache dir. Path is taken from calling script
-        $dba->show_errors();
-
         if(array_key_exists('latest', $matches)) { // latest issue by publication id
-            $pubs = new \FelixOnline\Core\IssueManager();
+            try {
+                $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+                $issue = $manager->filter('publication = %i', array($matches['latest']))
+                                 ->filter('inactive = 0')
+                                 ->order('date', 'DESC')
+                                 ->limit(0, 1)
+                                 ->values();
 
-            $check = $pubs->getPublications();
+                $issue = $issue[0];
 
-            if(!array_key_exists($matches['latest'], $check)) {
-                throw new \NotFoundException('This publication does not exist.', $matches, 'API-archiveController');
+                if($issue->getPublication()->getInactive()) {
+                    throw new \Exception('No model in database');
+                }
+
+                $issue = new IssueHelper($issue);
+            } catch(\Exception $e) {
+                throw new \NotFoundException(
+                    'The latest issue for this publication could not be found.',
+                    $matches,
+                    'API-ArchiveController'
+                );
             }
 
-            $pubs = $pubs->getLatestPublicationIssue($matches['latest']);
-            $pubs = $pubs[0]; // above is an array
-
-            $pubs = new IssueHelper($pubs);
-
             API::output(
-                $pubs->getExtendedOutput()
+                $issue->getExtendedOutput()
             );
         } else if(array_key_exists('id', $matches)) { // specific issue - by id
-            $issue = new \FelixOnline\Core\Issue($matches['id']);
-            $issue = new IssueHelper($issue);
+            try {
+                $issue = new \FelixOnline\Core\ArchiveIssue($matches['id']);
 
+                if($issue->getPublication()->getInactive() || $issue->getInactive()) {
+                    throw new \Exception('No model in database');
+                }
+
+                $issue = new IssueHelper($issue);
+            } catch(\Exception $e) {
+                throw new \NotFoundException(
+                    $e->getMessage(),
+                    $matches,
+                    'API-ArchiveController'
+                );
+            }
 
             API::output(
                 $issue->getExtendedOutput()
             );
         } else if(array_key_exists('pub', $matches)) { // issues in a specific publication - all years
-            $pubs = new \FelixOnline\Core\IssueManager();
-
-            $check = $pubs->getPublications();
-
-            if(!array_key_exists($matches['pub'], $check)) {
-                throw new \NotFoundException('This publication does not exist.', $matches, 'API-archiveController');
+            try {
+                $pub = new \FelixOnline\Core\ArchivePublication($matches['pub']);
+            } catch(\Exception $e) {
+                throw new \NotFoundException('This publication does not exist.', $matches, 'API-ArchiveController');
             }
 
-            $pubs = $pubs->getAllPublicationIssues($matches['pub']);
+            try {
+                $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+                $pubs = $manager->filter('publication = %i', array($matches['pub']))
+                                 ->filter('inactive = 0')
+                                 ->order('date', 'DESC')
+                                 ->values();
+            } catch(\Exception $e) {
+                throw new \NotFoundException('No issues found for this publication.', $matches, 'API-ArchiveController');
+            }
 
             $output = array();
 
@@ -76,12 +83,16 @@ class archiveController extends BaseController {
         } else { // list of publications
             $output = array();
 
-            $pubs = new \FelixOnline\Core\IssueManager();
-            $pubs = $pubs->getPublications();
+            try {
+                $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
+                $pubs = $manager->filter('inactive = 0')
+                                 ->values();
 
-            $output = array();
-            foreach($pubs as $id => $pub) {
-                $output[] = array('id' => $id, 'title' => $pub);
+                foreach($pubs as $id => $pub) {
+                    $output[] = (new PublicationHelper($pub))->getOutput();
+                }
+            } catch(\Exception $e) {
+                throw new \NotFoundException('No publications found.', $matches, 'API-archiveController');
             }
 
             API::output(

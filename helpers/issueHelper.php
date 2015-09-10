@@ -1,7 +1,7 @@
 <?php
 namespace FelixOnline\API;
 
-class IssueHelper {
+class IssueHelper extends BaseHelper {
     protected $this;
 
     function __construct($that) {
@@ -12,21 +12,30 @@ class IssueHelper {
      * Get output for the list of issues view
      */
     public function getOutput() {
-        return $this->this->getOutput();
-    }
+        $output = parent::getOutput();
 
+        unset($output['inactive']);
+
+        $output['publication'] = (new PublicationHelper($this->this->getPublication()))->getOutput();
+        $output['url'] = $this->this->getUrl();
+        $output['download-url'] = $this->this->getDownloadUrl();
+
+        return $output;
+    }
 
     /*
      * Get output for the specific issue view
      */
     public function getExtendedOutput() {
-        $initial = $this->this->getOutput();
+        $initial = $this->getOutput();
         $extended = array();
 
-        $extended['thumbnail-url'] = $this->this->getThumbnailURL();
-        $extended['thumbnail'] = $this->this->getThumbnail();
-        $extended['file-url'] = $this->this->getFile();
-        $extended['file'] = $this->this->getFileName();
+        $file = $this->this->getPrimaryFile();
+
+        $extended['thumbnail-url'] = $file->getThumbnailURL();
+        $extended['thumbnail'] = $file->getThumbnail();
+        $extended['file-url'] = $file->getFilename();
+        $extended['file'] = $file->getOnlyFilename();
 
         return array_merge($initial, $extended);
     }
