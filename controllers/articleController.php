@@ -19,11 +19,11 @@ class articleController extends BaseController {
                 $category = (new \FelixOnline\Core\CategoryManager())
                     ->filter('cat = "%s"', array($matches['cat']))
                     ->one();
-            } catch (Exceptions\InternalException $e) {
-                throw new Exceptions\NotFoundException(
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
                     $e->getMessage(),
-                    Exceptions\UniversalException::EXCEPTION_NOTFOUND,
-                    $e
+                    $matches,
+                    'API-ArticleController'
                 );
             }
 

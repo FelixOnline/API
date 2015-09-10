@@ -1,6 +1,8 @@
 <?php
 namespace FelixOnline\API;
 
+use \FelixOnline\Exceptions;
+
 /*
  * Category Controller
  */
@@ -18,12 +20,13 @@ class categoryController extends BaseController {
             try {
                 $category = (new \FelixOnline\Core\CategoryManager())
                     ->filter('cat = "%s"', array($matches['cat']))
+                    ->filter('secret = 0')
                     ->one();
-            } catch (Exceptions\InternalException $e) {
-                throw new Exceptions\NotFoundException(
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
                     $e->getMessage(),
-                    Exceptions\UniversalException::EXCEPTION_NOTFOUND,
-                    $e
+                    $matches,
+                    'API-CategoryController'
                 );
             }
 
@@ -39,6 +42,7 @@ class categoryController extends BaseController {
             $cats = (new \FelixOnline\Core\CategoryManager())
                 ->filter('hidden = 0')
                 ->filter('id > 0')
+                ->filter('secret = 0')
                 ->order('order', 'ASC')
                 ->values();
 
