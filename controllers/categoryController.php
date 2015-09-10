@@ -10,7 +10,16 @@ class categoryController extends BaseController {
     function GET($matches) {
         global $db;
         if(array_key_exists('id', $matches)) { // if specific section - by id
-            $category = new CategoryHelper(new \FelixOnline\Core\Category($matches['id']));
+            try {
+                $category = new CategoryHelper(new \FelixOnline\Core\Category($matches['id']));
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    $e->getMessage(),
+                    $matches,
+                    'API-CategoryController'
+                );
+            }
+
             $output = $category->getOutput();
 
             API::output(
@@ -39,12 +48,20 @@ class categoryController extends BaseController {
         } else {
             $output = array();
 
-            $cats = (new \FelixOnline\Core\CategoryManager())
-                ->filter('hidden = 0')
-                ->filter('id > 0')
-                ->filter('secret = 0')
-                ->order('order', 'ASC')
-                ->values();
+            try {
+                $cats = (new \FelixOnline\Core\CategoryManager())
+                    ->filter('hidden = 0')
+                    ->filter('id > 0')
+                    ->filter('secret = 0')
+                    ->order('order', 'ASC')
+                    ->values();
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    'No categories found.',
+                    $matches,
+                    'API-CategoryController'
+                );
+            }
 
             foreach($cats as $object) {
                 $category = new CategoryHelper($object);

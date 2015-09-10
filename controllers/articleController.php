@@ -8,8 +8,16 @@ class articleController extends BaseController {
     function GET($matches) {
         global $db;
         if(array_key_exists('id', $matches)) { // if specific article
-            $art = new \FelixOnline\Core\Article($matches['id']);
-            $article = new ArticleHelper($art);
+            try {
+                $art = new \FelixOnline\Core\Article($matches['id']);
+                $article = new ArticleHelper($art);
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    $e->getMessage(),
+                    $matches,
+                    'API-ArticleController'
+                );
+            }
 
             if($art->getCategory()->getSecret()) {
                 throw new \Exception('No model in database');
@@ -28,7 +36,7 @@ class articleController extends BaseController {
                     ->one();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
-                    $e->getMessage(),
+                    'This category cannot be found.',
                     $matches,
                     'API-ArticleController'
                 );
@@ -36,11 +44,19 @@ class articleController extends BaseController {
 
             $output = array();
 
-            $manager = (new \FelixOnline\Core\ArticleManager())
-                ->filter('published < NOW()')
-                ->order('published', 'DESC')
-                ->filter('category = %i', array($category->getId()))
-                ->limit(0, 10);
+            try {
+                $manager = (new \FelixOnline\Core\ArticleManager())
+                    ->filter('published < NOW()')
+                    ->order('published', 'DESC')
+                    ->filter('category = %i', array($category->getId()))
+                    ->limit(0, 10);
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    'No articles found.',
+                    $matches,
+                    'API-ArticleController'
+                );
+            }
 
             foreach($manager->values() as $object) {
                 $article = new ArticleHelper($object);
@@ -53,10 +69,18 @@ class articleController extends BaseController {
         } else {
             $output = array();
 
-            $manager = (new \FelixOnline\Core\ArticleManager())
-                ->filter('published < NOW()')
-                ->order('published', 'DESC')
-                ->limit(0, 10);
+            try {
+                $manager = (new \FelixOnline\Core\ArticleManager())
+                    ->filter('published < NOW()')
+                    ->order('published', 'DESC')
+                    ->limit(0, 10);
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    'No articles found.',
+                    $matches,
+                    'API-ArticleController'
+                );
+            }
 
             foreach($manager->values() as $object) {
                 $article = new ArticleHelper($object);
