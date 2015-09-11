@@ -57,24 +57,24 @@
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
         try { // try mapping request to urls
             glue::stick($urls, API_RELATIVE_PATH);
-        } catch (NotFoundException $e) { // if it fails then send a 404 response
-            \FelixOnline\API\API::error(404, $e->getMessage(), $e);
         } catch (GlueMethodException $e) { // if it fails then send a 404 response
             \FelixOnline\API\API::error(501, 'The '.strtoupper($e->getMethod()).' method is not valid for this endpoint.', $e);
         } catch (GlueURLException $e) { // if it fails then send a 404 response
             \FelixOnline\API\API::error(404, 'This endpoint does not exist', $e);
+        } catch (NotFoundException $e) { // if it fails then send a 404 response
+            \FelixOnline\API\API::error(404, $e->getMessage(), $e);
         } catch(\Exception $e) {
             \FelixOnline\API\API::error(500, $e->getMessage(), $e, true);
         }
     } else {
         try { // try mapping request to urls
             glue::stick($urls);
-        } catch (NotFoundException $e) { // if it fails then send a 404 response
-            \FelixOnline\API\API::error(404, $e->getMessage(), $e);
         } catch (GlueMethodException $e) { // if it fails then send a 404 response
             \FelixOnline\API\API::error(501, 'The '.strtoupper($e->getMethod()).' method is not valid for this endpoint.', $e);
         } catch (GlueURLException $e) { // if it fails then send a 404 response
             \FelixOnline\API\API::error(404, 'This endpoint does not exist', $e);
+        } catch (NotFoundException $e) { // if it fails then send a 404 response
+            \FelixOnline\API\API::error(404, $e->getMessage(), $e);
         } catch(\Exception $e) {
             \FelixOnline\API\API::error(500, $e->getMessage(), $e, true);
         }
