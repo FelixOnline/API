@@ -8,7 +8,6 @@ use \FelixOnline\Exceptions;
  */
 class categoryController extends BaseController {
     function GET($matches) {
-        global $db;
         if(array_key_exists('id', $matches)) { // if specific section - by id
             try {
                 $category = new CategoryHelper(new \FelixOnline\Core\Category($matches['id']));

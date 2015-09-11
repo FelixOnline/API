@@ -35,7 +35,8 @@ class API {
      *
      */
     public static function log_api_request($class) {
-        global $db;
+        $app = \FelixOnline\Core\App::getInstance();
+        $db = $app['db'];
 
         $sql = "INSERT INTO `api_log` 
                 (

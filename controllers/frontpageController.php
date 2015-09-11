@@ -8,7 +8,6 @@ use \FelixOnline\Exceptions;
  */
 class frontpageController extends BaseController {
     function GET($matches) {
-        global $db;
         if(array_key_exists('sec', $matches)) { // if specific section - by section name
             try {
                 $sec = new \FelixOnline\Core\FrontpageManager();

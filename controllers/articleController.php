@@ -6,7 +6,6 @@ namespace FelixOnline\API;
  */
 class articleController extends BaseController {
     function GET($matches) {
-        global $db;
         if(array_key_exists('id', $matches)) { // if specific article
             try {
                 $art = new \FelixOnline\Core\Article($matches['id']);
