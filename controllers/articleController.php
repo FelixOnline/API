@@ -49,6 +49,8 @@ class articleController extends BaseController {
                     ->order('published', 'DESC')
                     ->filter('category = %i', array($category->getId()))
                     ->limit(0, 10);
+
+                $values = $manager->values();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
                     'No articles found.',
@@ -57,7 +59,14 @@ class articleController extends BaseController {
                 );
             }
 
-            foreach($manager->values() as $object) {
+            foreach($values as $object) {
+                $article = new ArticleHelper($object);
+                $output[] = $article->getOutput();
+            }
+
+            API::output(
+                $output
+            );
                 $article = new ArticleHelper($object);
                 $output[] = $article->getOutput();
             }
@@ -73,6 +82,8 @@ class articleController extends BaseController {
                     ->filter('published < NOW()')
                     ->order('published', 'DESC')
                     ->limit(0, 10);
+
+                $values = $manager->values();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
                     'No articles found.',
@@ -81,7 +92,7 @@ class articleController extends BaseController {
                 );
             }
 
-            foreach($manager->values() as $object) {
+            foreach($values as $object) {
                 $article = new ArticleHelper($object);
                 $output[] = $article->getOutput();
             }
