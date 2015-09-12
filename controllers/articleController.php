@@ -67,6 +67,28 @@ class articleController extends BaseController {
             API::output(
                 $output
             );
+        } else if(array_key_exists('user', $matches)) { // category articles
+            try {
+                $userManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArticleAuthor', 'article_author');
+                $userManager->filter('author = "%s"', array($matches['user']));
+
+                $manager = (new \FelixOnline\Core\ArticleManager())
+                    ->filter('published < NOW()')
+                    ->order('published', 'DESC')
+                    ->limit(0, 10);
+
+                $manager->join($userManager, null, null, 'article');
+
+                $values = $manager->values();
+            } catch (\Exception $e) {
+                throw new \NotFoundException(
+                    'No articles found.',
+                    $matches,
+                    'API-ArticleController'
+                );
+            }
+
+            foreach($values as $object) {
                 $article = new ArticleHelper($object);
                 $output[] = $article->getOutput();
             }

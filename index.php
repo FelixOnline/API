@@ -55,6 +55,8 @@
         '/archive/(?P<pub>[0-9]+)/year/(?P<year>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/archive/(?P<latest>[0-9]+)/latest' => 'FelixOnline\API\archiveController',
         '/archive/issue/(?P<id>[0-9]+)' => 'FelixOnline\API\archiveController',
+        '/user/(?P<user>[a-zA-Z0-9]+)' => 'FelixOnline\API\userController',
+        '/user/(?P<user>[a-zA-Z0-9]+)/articles' => 'FelixOnline\API\articleController'
     );
 
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
