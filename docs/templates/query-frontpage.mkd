@@ -8,8 +8,8 @@ Returns all articles in all front page sections. This only shows items pinned in
 `http://api.felixonline.co.uk/frontpage`
 
 ## Example response:
-    {
-        0: [frontpage_object],
-        1: [frontpage_object],
+    [
+        [frontpage_object],
+        [frontpage_object],
         ...
-    }
+    ]

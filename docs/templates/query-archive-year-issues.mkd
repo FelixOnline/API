@@ -8,8 +8,8 @@ Returns the simple issue object format for all issues in a year. This can be qui
 `http://api.felixonline.co.uk/archive/year/2015`
 
 ## Example response:
-    {
+    [
         [issue_object] - simple,
         [issue_object] - simple,
         ...
-    }
+    ]

@@ -8,8 +8,8 @@ Returns all publications you can access issues for.
 `http://api.felixonline.co.uk/archive`
 
 ## Example response:
-    {
+    [
         [publication_object],
         [publication_object],
         ...
-    }
+    ]

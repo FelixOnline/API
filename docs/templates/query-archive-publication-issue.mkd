@@ -8,7 +8,6 @@ Returns a specific issue for a specific publication - supply the issue number NO
 `http://api.felixonline.co.uk/archive/1/1500`
 
 ## Example response:
-    {
-        [issue_object] - extended,
-        ...
-    }
+    [
+        [issue_object] - extended
+    ]

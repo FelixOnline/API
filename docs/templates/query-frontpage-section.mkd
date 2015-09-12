@@ -8,8 +8,8 @@ Returns all articles in a front page section. The list of sections is not advert
 `http://api.felixonline.co.uk/frontpage/featured`
 
 ## Example response:
-    {
+    [
         [frontpage_object],
         [frontpage_object],
         ...
-    }
+    ]

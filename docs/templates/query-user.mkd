@@ -5,6 +5,6 @@
 Returns the user object for the specified username
 
 ## Example response:
-    {
+    [
         [user_object]
-    }
+    ]

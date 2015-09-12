@@ -5,15 +5,15 @@
 Returns the 10 most recent articles published to Felix Online by a user specified with their username
 
 ## Example response:
-    {
-        0: [article_object],
-        1: [article_object],
-        2: [article_object],
-        3: [article_object],
-        4: [article_object],
-        5: [article_object],
-        6: [article_object],
-        7: [article_object],
-        8: [article_object],
-        9: [article_object]
-    }
+    [
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object],
+        [article_object]
+    ]
