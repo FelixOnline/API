@@ -6,7 +6,74 @@ namespace FelixOnline\API;
  */
 class archiveController extends BaseController {
     function GET($matches) {
-        if(array_key_exists('latest', $matches)) { // latest issue by publication id
+        if(array_key_exists('year_pub', $matches)) {
+            $publicationManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
+            $publicationManager->filter('inactive = 0')
+                               ->filter('id = %i', array($matches['year_pub']));
+
+            $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+            $end = $manager->filter('inactive = 0')
+                    ->order('date', 'DESC')
+                    ->limit(0, 1)
+                    ->join($publicationManager, null, 'publication')
+                    ->values();
+
+            $end = (int) date('Y', $end[0]->getDate());
+
+            $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+            $start = $manager->filter('inactive = 0')
+                    ->order('date', 'ASC')
+                    ->limit(0, 1)
+                    ->join($publicationManager, null, 'publication')
+                    ->values();
+
+            $start = (int) date('Y', $start[0]->getDate());
+
+            $years = array();
+
+            for($i = $start; $i < $end; $i++) {
+                $years[] = $i;
+            }
+
+            $years[] = $end;
+
+            API::output(
+                $years
+            );
+        } else if(array_key_exists('years', $matches)) {
+            $publicationManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
+            $publicationManager->filter('inactive = 0');
+
+            $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+            $end = $manager->filter('inactive = 0')
+                    ->order('date', 'DESC')
+                    ->limit(0, 1)
+                    ->join($publicationManager, null, 'publication')
+                    ->values();
+
+            $end = (int) date('Y', $end[0]->getDate());
+
+            $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
+            $start = $manager->filter('inactive = 0')
+                    ->order('date', 'ASC')
+                    ->limit(0, 1)
+                    ->join($publicationManager, null, 'publication')
+                    ->values();
+
+            $start = (int) date('Y', $start[0]->getDate());
+
+            $years = array();
+
+            for($i = $start; $i < $end; $i++) {
+                $years[] = $i;
+            }
+
+            $years[] = $end;
+
+            API::output(
+                $years
+            );
+        } else if(array_key_exists('latest', $matches)) { // latest issue by publication id
             try {
                 $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
                 $issue = $manager->filter('publication = %i', array($matches['latest']))

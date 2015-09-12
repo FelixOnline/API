@@ -1,0 +1,16 @@
+<div class="page-header">
+    <h2>Archive: Publication Years <small><code>http://api.felixonline.co.uk/archive/years/:pubid</code></small></h2>
+</div>
+
+Returns a list of years that issues for the specified publication exist in. Note that this is calculated by taking the first year that an issue exists, the last issue, and assumes an issue exists in every year in between so some years in the middle may have no issues.
+
+## Example call:
+`http://api.felixonline.co.uk/archive/years/1`
+
+## Example response:
+    [
+        int,
+        int,
+        int,
+        ...
+    ]

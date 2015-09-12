@@ -51,6 +51,8 @@
         '/archive' => 'FelixOnline\API\archiveController',
         '/archive/(?P<pub>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/archive/(?P<pub>[0-9]+)/(?P<issue>[0-9]+)' => 'FelixOnline\API\archiveController',
+        '/archive/(?P<years>(years))' => 'FelixOnline\API\archiveController',
+        '/archive/years/(?P<year_pub>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/archive/year/(?P<year>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/archive/(?P<pub>[0-9]+)/year/(?P<year>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/archive/(?P<latest>[0-9]+)/latest' => 'FelixOnline\API\archiveController',
