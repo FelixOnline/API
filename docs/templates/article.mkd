@@ -67,3 +67,9 @@ Finally, FelixImages contain an ID number for the image for fetching from the Im
             ...
         ]
     }
+
+## Remarks
+
+Some sections are "secret" and can only be accessed from the Imperial College network.
+
+If an article is in a "secret" section, it cannot be accessed.

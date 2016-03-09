@@ -6,10 +6,12 @@
     <?php
         // section files
         //$sections = array('article', 'image', 'user', 'comments', 'frontpage', 'most_commented', 'most_read', 'search');
-        $sections = array('article', 'comments', 'image', 'user', 'section', 'frontpage', 'publication', 'issue');
+        $sections = array('article', 'comments', 'image', 'user', 'section', 'frontpage', 'publication', 'issue', 'section');
         $queries = array('articles',
             'articles-category',
             'articles-article',
+            'sections',
+            'sections-section',
             'frontpage',
             'frontpage-section',
             'archive-publication',

@@ -2,7 +2,7 @@
     <h1>Section <small>a section object</small></h1>
 </div>
 
-### Values:
+## Values:
 
 Key           | Value                 | Returns
 ----          |-------                |--------
@@ -11,7 +11,9 @@ Key           | Value                 | Returns
 `cat`         | Short section title   | String
 `email`       | Section contact email | String
 `twitter`     | Twitter handle (no @) | String
+`secret`      | If true, can only be accessed from the Imperial College network | Boolean
 `editors`     | Section Editors | Array of [User Objects](#user)
+`parent`      | The parent section for this section | [Section object]
 
 ## Example object
     {
@@ -24,4 +26,12 @@ Key           | Value                 | Returns
             [user_object],
             [user_object]
         ],
+        secret: false,
+        parent: null
     }
+
+## Remarks
+
+Some sections are "secret" and can only be accessed from the Imperial College network.
+
+However, marking a section as "secret" does not prevent access to child sections unless these are also "secret".

@@ -18,7 +18,7 @@ class articleController extends BaseController {
                 );
             }
 
-            if($art->getCategory()->getSecret() || !$art->getPublished()) {
+            if(!$art->getPublished()) {
                 throw new \Exception('No model in database');
             }
 
