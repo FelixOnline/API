@@ -20,8 +20,12 @@ class ArticleHelper extends BaseHelper {
         // content
         unset($output['text1']);
 
-        $output['content'] = \Utility::tidyText($this->this->getContent());
-        $output['raw_content'] = $this->this->getContent();
+        try {
+            $output['content'] = \Utility::tidyText($this->this->getContent());
+            $output['raw_content'] = $this->this->getContent();
+        } catch(\Exception $e) {
+            $output['content'] = "Couldn't load this article's content.";
+            $output['raw_content'] = "Couldn't load this article's content.";
 
         // image
         unset($output['img1']);
