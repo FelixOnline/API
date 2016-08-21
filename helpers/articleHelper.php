@@ -26,6 +26,7 @@ class ArticleHelper extends BaseHelper {
         } catch(\Exception $e) {
             $output['content'] = "Couldn't load this article's content.";
             $output['raw_content'] = "Couldn't load this article's content.";
+        }
 
         // image
         unset($output['img1']);
