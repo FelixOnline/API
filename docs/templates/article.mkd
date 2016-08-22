@@ -2,7 +2,7 @@
     <h2>Article <small>an article object</small></h2>
 </div>
 
-### Values:
+### Values
 
 Key         | Value                 | Returns
 ----        |-------                |--------
@@ -21,7 +21,7 @@ Key         | Value                 | Returns
 `comment_count` | Number of comments on article | Int
 `img_caption` | Caption for the image | String
 
-## Raw Content
+### Raw Content
 For advanced uses you may want to access this.
 
 The content is built up of a number of components.
@@ -38,7 +38,7 @@ Images have a URI.
 
 Finally, FelixImages contain an ID number for the image for fetching from the Image endpoint (see the [Image Object](#image)), a caption, and an attribution. These should be used in preference to that obtained from the Image endpoint.
 
-## Example object
+### Example object
     {
         id: "42",
         title: "Hello World",
@@ -68,7 +68,7 @@ Finally, FelixImages contain an ID number for the image for fetching from the Im
         ]
     }
 
-## Remarks
+### Remarks
 
 Some sections are "secret" and can only be accessed from the Imperial College network.
 

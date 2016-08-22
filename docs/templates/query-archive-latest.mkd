@@ -1,12 +1,10 @@
-<div class="page-header">
-    <h2>Archive: Latest Issue <small><code>http://api.felixonline.co.uk/archive/:pub/latest</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/archive/:pub/latest</code>
 
 Returns the extended form of the Issue object for the most recent issue in a publication.
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/archive/1/latest`
 
-## Example response:
+### Example response
     [issue_object] - extended
 

@@ -1,8 +1,8 @@
 <div class="page-header">
-    <h1>Section <small>a section object</small></h1>
+    <h2>Section <small>a section object</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key           | Value                 | Returns
 ----          |-------                |--------
@@ -15,7 +15,7 @@ Key           | Value                 | Returns
 `editors`     | Section Editors | Array of [User Objects](#user)
 `parent`      | The parent section for this section | [Section object]
 
-## Example object
+### Example object
     {
         id: "42",
         label: "Hello",
@@ -30,7 +30,7 @@ Key           | Value                 | Returns
         parent: null
     }
 
-## Remarks
+### Remarks
 
 Some sections are "secret" and can only be accessed from the Imperial College network.
 

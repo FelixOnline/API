@@ -1,8 +1,6 @@
-<div class="page-header">
-    <h2>Section by ID or cat <small><code>http://api.felixonline.co.uk/sections/<id-or-cat></code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/sections/<id-or-cat></code>
 
 Returns a section by ID number or cat value (see [Section Objects](#section))
 
-## Example response:
+### Example response
     [section_object]

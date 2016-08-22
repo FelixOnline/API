@@ -1,12 +1,10 @@
-<div class="page-header">
-    <h2>Specific Article <small><code>http://api.felixonline.co.uk/articles/:id</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/articles/:id</code>
 
 Returns a specific article object
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/articles/1234`
 
-## Example response:
+### Example response
     [article_object]
 

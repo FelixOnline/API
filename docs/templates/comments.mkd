@@ -2,7 +2,7 @@
     <h2>Comments <small>a comment object</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                           | Returns
 ----            |-------                          |--------
@@ -14,7 +14,7 @@ Key             | Value                           | Returns
 `likes` | Number of likes | Int
 `dislikes` | Number of dislikes | Int
 
-## Example object
+### Example object
 	{
 		"name":"Someone",
 		"comment":"blah blah blah",

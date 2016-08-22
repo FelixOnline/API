@@ -2,7 +2,7 @@
     <h2>Image <small>an image object</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                     | Returns
 ----            |-------                    |--------
@@ -17,7 +17,7 @@ Key             | Value                     | Returns
 `width`         | Width of image            | Int
 `height`        | Height of image           | Int
 
-## Example object
+### Example object
     {
         id: "1376",
         title: "best interior.jpg",

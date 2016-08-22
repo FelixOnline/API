@@ -16,16 +16,29 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- LESS: implied media="all" -->
-    <link rel="stylesheet/less" type="text/css/" href="<?php echo API_DOCS_URL; ?>css/bootstrap.less">
-    <link rel="stylesheet/less" type="text/css/" href="<?php echo API_DOCS_URL; ?>css/responsive.less">
-    <link rel="stylesheet/less" type="text/css/" href="<?php echo API_DOCS_URL; ?>css/style.less">
-    <script src="<?php echo API_DOCS_URL; ?>js/libs/less.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo API_DOCS_URL; ?>concise.min.css">
+
+    <style>
+        section:before{
+            content:"";
+            display:block;
+            height: 3rem;
+            margin: -4rem 0 0;
+        }
+
+        .dropdown-content .group-item {
+            padding: 0;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            font-size: larger;
+            border: none;
+        }
+
+        .dropdown-content ul {
+            margin-bottom: 0;
+        }
+    </style>
 
     <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
-
-    <!-- All JavaScript at the bottom, except this Modernizr build.
-       Modernizr enables HTML5 elements & feature detects for optimal performance.
-       Create your own custom Modernizr build: www.modernizr.com/download/ -->
-    <script src="<?php echo API_DOCS_URL;?>js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>

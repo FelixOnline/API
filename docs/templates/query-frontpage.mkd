@@ -1,13 +1,11 @@
-<div class="page-header">
-    <h2>Frontpage <small><code>http://api.felixonline.co.uk/frontpage</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/frontpage</code>
 
 Returns all articles in all front page sections. This only shows items pinned in places, some front page areas are dynamic based on recent uploads.
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/frontpage`
 
-## Example response:
+### Example response
     [
         [frontpage_object],
         [frontpage_object],

@@ -1,10 +1,8 @@
-<div class="page-header">
-    <h2>User <small><code>http://api.felixonline.co.uk/user/:login</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/user/:login</code>
 
 Returns the user object for the specified username
 
-## Example response:
+### Example response
     [
         [user_object]
     ]

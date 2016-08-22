@@ -1,10 +1,8 @@
-<div class="page-header">
-    <h2>User Articles <small><code>http://api.felixonline.co.uk/user/:login/articles</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/user/:login/articles</code>
 
 Returns the 10 most recent articles published to Felix Online by a user specified with their username
 
-## Example response:
+### Example response
     [
         [article_object],
         [article_object],

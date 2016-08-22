@@ -1,13 +1,11 @@
-<div class="page-header">
-    <h2>Archive: Publication Issue <small><code>http://api.felixonline.co.uk/archive/:pubid/:issueno</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/archive/:pubid/:issueno</code>
 
 Returns a specific issue for a specific publication - supply the issue number NOT the issue ID
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/archive/1/1500`
 
-## Example response:
+### Example response
     [
         [issue_object] - extended
     ]

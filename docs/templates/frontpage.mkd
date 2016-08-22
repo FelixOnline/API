@@ -2,7 +2,7 @@
     <h2>Frontpage <small>a frontpage item object</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                           | Returns
 ----            |-------                          |--------
@@ -11,7 +11,7 @@ Key             | Value                           | Returns
 `section`       | Name of the front page section  | String
 `sort_order`    | The order that the item shows   | Int
 
-## Example object
+### Example object
     {
         id: "1376",
         section: "featured",

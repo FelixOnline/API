@@ -2,7 +2,7 @@
     <h2>User <small>a user object</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                     | Returns
 ----            |-------                    |--------
@@ -17,7 +17,7 @@ Key             | Value                     | Returns
 `websiteurl`    | Website url               | String
 `img`           | User image object (not used yet) | [Image Object](#image)
 
-## Example object
+### Example object
     {
         user: "felix",
         name: "Felix",

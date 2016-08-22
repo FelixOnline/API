@@ -1,13 +1,11 @@
-<div class="page-header">
-    <h2>Archive: Publications <small><code>http://api.felixonline.co.uk/archive</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/archive</code>
 
 Returns all publications you can access issues for.
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/archive`
 
-## Example response:
+### Example response
     [
         [publication_object],
         [publication_object],

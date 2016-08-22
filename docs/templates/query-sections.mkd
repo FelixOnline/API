@@ -1,10 +1,8 @@
-<div class="page-header">
-    <h2>All Sections <small><code>http://api.felixonline.co.uk/sections</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/sections</code>
 
 Returns all sections
 
-## Example response:
+### Example response
     [
         [section_object],
         ...

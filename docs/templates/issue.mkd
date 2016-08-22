@@ -2,7 +2,7 @@
     <h2>Issue <small>an object relating to an issue PDF</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                                                    | Returns
 ----            |-------                                                   |--------
@@ -19,7 +19,7 @@ Key             | Value                                                    | Ret
 
 Items marked * are only shown in 'extended' outputs, see queries section. The 'simple' form of the object does not include the items with * by their description as this would significantly slow down the API.
 
-## Example object
+### Example object
     {
     	"issue": "1610",
     	"date": 1434668400,

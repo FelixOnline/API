@@ -1,13 +1,11 @@
-<div class="page-header">
-    <h2>Articles by Category <small><code>http://api.felixonline.co.uk/articles/:cat</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/articles/:cat</code>
 
 Returns the 10 most recent articles published to a specific category
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/articles/news`
 
-## Example response:
+### Example response
     [
         [article_object],
         [article_object],

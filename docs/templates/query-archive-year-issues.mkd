@@ -1,13 +1,11 @@
-<div class="page-header">
-    <h2>Archive: Year Issues <small><code>http://api.felixonline.co.uk/archive/year/:year</code></small></h2>
-</div>
+<code>http://api.felixonline.co.uk/archive/year/:year</code>
 
 Returns the simple issue object format for all issues in a year. This can be quite slow if a year has a lot of issues.
 
-## Example call:
+### Example call
 `http://api.felixonline.co.uk/archive/year/2015`
 
-## Example response:
+### Example response
     [
         [issue_object] - simple,
         [issue_object] - simple,

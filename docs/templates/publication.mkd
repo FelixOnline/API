@@ -2,14 +2,14 @@
     <h2>Publication <small>an object relating to an archive publication</small></h2>
 </div>
 
-## Values:
+### Values
 
 Key             | Value                                                    | Returns
 ----            |-------                                                   |--------
 `id`            | ID of issue (not the same as issue number)               | Int
 `name`          | Publication name                                         | String
 
-## Example object
+### Example object
     {
     	"id": 1,
         "name": "Felix"
