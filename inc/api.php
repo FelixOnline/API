@@ -1,7 +1,7 @@
 <?php
 namespace FelixOnline\API;
 
-define('API_VERSION', 0.3);
+define('API_VERSION', 0.4);
 if(!defined('API_NAME')): define('API_NAME', 'Felix Online API'); endif;
 if(!defined('API_COPYRIGHT')): define('API_COPYRIGHT', '(c) Felix Online'); endif;
 
