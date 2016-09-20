@@ -24,7 +24,8 @@
             'archive-latest' => "Issue Archive Latest Issues",
             'archive-issue' => "Issue Archive Issue by ID",
             'user' => "Users",
-            'user-articles' => "User's Articles");
+            'user-articles' => "User's Articles",
+            'versioning' => "Record Update Timestamps");
     ?>
 <div class="top-buttons" style="border-bottom: 1px solid #ca4829; position: fixed; width: 100%; background: white; top: 0; padding-top: 1rem; padding-bottom: 1rem; text-align: left;">
     <div container>

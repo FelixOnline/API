@@ -1,0 +1,35 @@
+<code>http://api.felixonline.co.uk/record_versioning/:table/:key</code>
+
+Returns either the date of the last update/creation, or the date the record specified is deleted.
+
+Returns 404 if no entries are found in the event log for this record. Where a database was in use prior to January 2016, many records will not have entries in the event log as they would have been created before the event log existed. Subsequent updates to these records will create new events.
+
+The date is provided as a POSIX timestamp
+
+Please check the latest database schema for table names, however for convenience the most common ones are:
+
+* article
+* user
+* image
+
+### Example call
+`http://api.felixonline.co.uk/record_versioning/article/5`
+
+### Example response
+    {
+    	"deleted": 0,
+    	"date": 123456,
+    	"user": "felix"
+    }
+
+### Alternative query for articles
+
+<code>http://api.felixonline.co.uk/record_versioning/article/:id/text</code>
+
+Article text is stored in a separate schema to the rest of the article data to mitigate historic MySQL performance deterioration when selecting records which contain very large TEXT fields. Therefore, to obtain the update date of an article's text, either the text ID must be identified and a record_versioning query run against the text_story table.
+
+As an alternative, you may call this query, providing the ID number of the article you wish to check the text for. The API will automatically identify the text ID for you and run the relevant query.
+
+Note that updating an article text is not guaranteed to cause an update on the article record itself.
+
+An attempt to run this query (by appending "/text") on a table other than article will result in a 404 error.

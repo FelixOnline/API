@@ -58,7 +58,9 @@
         '/archive/(?P<latest>[0-9]+)/latest' => 'FelixOnline\API\archiveController',
         '/archive/issue/(?P<id>[0-9]+)' => 'FelixOnline\API\archiveController',
         '/user/(?P<user>[a-zA-Z0-9]+)' => 'FelixOnline\API\userController',
-        '/user/(?P<user>[a-zA-Z0-9]+)/articles' => 'FelixOnline\API\articleController'
+        '/user/(?P<user>[a-zA-Z0-9]+)/articles' => 'FelixOnline\API\articleController',
+        '/record_versioning/(?P<schema>[a-z_]+)/(?P<identifier>[a-zA-Z0-9_\-]+)/(?P<text>(text))' => 'FelixOnline\API\recordVersioningController',
+        '/record_versioning/(?P<schema>[a-z_]+)/(?P<identifier>[a-zA-Z0-9_\-]+)' => 'FelixOnline\API\recordVersioningController'
     );
 
     if(defined('API_RELATIVE_PATH')) { // if a relative path is defined
