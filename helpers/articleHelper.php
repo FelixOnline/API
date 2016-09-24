@@ -15,6 +15,7 @@ class ArticleHelper extends BaseHelper {
 
         // approved by
         unset($output['approvedby']);
+        unset($output['reviewedby']);
         //$output['approvedby'] = $this->this->getApprovedBy()->getOutput();
 
         // content
@@ -55,6 +56,7 @@ class ArticleHelper extends BaseHelper {
 
         unset($output['comment_status']);
         unset($output['searchable']);
+        unset($output['blog']);
 
         return $output;
     }

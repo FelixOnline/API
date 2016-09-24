@@ -18,6 +18,12 @@ class CategoryHelper extends BaseHelper {
 
         $output['editors'] = array();
 
+        // parent
+        if($this->this->getParent()) {
+            $category = new CategoryHelper($this->this->getParent());
+            $output['parent'] = $category->getOutput();
+        }
+
         if($this->this->getEditors()) {
             foreach($this->this->getEditors() as $key => $editors) {
                 $editors = new UserHelper($editors);
