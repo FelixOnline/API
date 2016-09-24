@@ -1,6 +1,8 @@
 <code>http://api.felixonline.co.uk/articles</code>
 
-Returns the 10 most recent articles published to Felix Online
+Returns the most recent articles published to Felix Online.
+
+There is a known limitation with the pagination approach for articles, which is described in the [Overview](#overview).
 
 ### Example response
     [

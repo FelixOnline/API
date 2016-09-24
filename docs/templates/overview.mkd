@@ -14,3 +14,27 @@ You can check what version of the API is running on the server by going to the e
         name: "Name API",
         copyright: "(c) Name Corp"
     }
+
+### Pagination
+
+Most queries which return multiple records will return records in batches of 10. This can be customised by passing "?limit=x" to the end of the query, where x is the number of records to return.
+
+Paginated records will be provided with "from" and "max" cursors - which indicate the key value on the first and final record on the page. This is usually the ID number, but for records where IDs will not be sequential (notably articles), another field may be used instead. For articles, the date field is used and will be provided in a format that will require escaping if used in a GET query.
+
+The cursors can be used in 3 ways:
+
+* To refresh the current page (for example, if the limit is increased and you wish to keep the same start point), pass "?after=x" where x is the value of the "from" cursor **less** 1.
+* To obtain the next page, pass "?after=x" where x is the value of the "max" cursor.
+* To obtain the previous page, pass "?before=x" where ix the value of the "from cursor".
+
+The before/after parameters operate a sample less than/greater than test in the database query. As a result, to refresh the current page you will need to deduct an amount (1 is fine) from the "from" cursor otherwise the first result on the current page may disappear. Alternatively, you can reuse the cursor values from the previous query you made, or just re-run the query if you are refreshing the first page.
+
+If you follow a cursor beyond the range of available results, a 404 response will be provided.
+
+In a small number of cases, changing page will skip records - this is anticipated to occur with articles. This is because the range of cursor values repeats (by virtue of using dates). A suggested approach is to keep querying the endpoint with higher limits until a result is returned which is smaller than the limit set. The "max" cursor will still provide a value which is appropriate for use in the subsequent query to obtain the next page.
+
+If the limit is set too large, multiple days articles may be obtained. As the cursor will only permit obtaining a complete list of an entire day's worth of articles in one result, when the next query is run it may be necessary to deliberately re-request some articles to ensure a complete list is obtained.
+
+The inefficiency of this approach is partially alleviated by obtaining articles per category, where smaller limits will be required.
+
+The developers appreciates the limitations inherent in this approach and a better solution is currently in production.

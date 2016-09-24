@@ -8,6 +8,8 @@ use \FelixOnline\Exceptions;
  */
 class categoryController extends BaseController {
     function GET($matches) {
+        $paginatorWrapper = new \FelixOnline\API\PaginatorWrapper();
+
         if(array_key_exists('id', $matches)) { // if specific section - by id
             try {
                 $category = new CategoryHelper(new \FelixOnline\Core\Category($matches['id']));
@@ -52,8 +54,10 @@ class categoryController extends BaseController {
                     ->filter('hidden = 0')
                     ->filter('id > 0')
                     ->filter('secret = 0')
-                    ->order('order', 'ASC')
-                    ->values();
+                    ->filter('parent IS NULL')
+                    ->order('order', 'ASC');
+
+                $cats = $paginatorWrapper->setManager($cats)->values();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
                     'No categories found.',
@@ -68,7 +72,9 @@ class categoryController extends BaseController {
             }
 
             API::output(
-                $output
+                $output,
+                $paginatorWrapper->since(),
+                $paginatorWrapper->max()
             );
         }
     }

@@ -6,7 +6,9 @@ namespace FelixOnline\API;
  */
 class archiveController extends BaseController {
     function GET($matches) {
-        if(array_key_exists('year_pub', $matches)) {
+        $paginatorWrapper = new \FelixOnline\API\PaginatorWrapper();
+
+        if(array_key_exists('year_pub', $matches)) { // all years for a specific publication
             $publicationManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
             $publicationManager->filter('inactive = 0')
                                ->filter('id = %i', array($matches['year_pub']));
@@ -40,7 +42,7 @@ class archiveController extends BaseController {
             API::output(
                 $years
             );
-        } else if(array_key_exists('years', $matches)) {
+        } else if(array_key_exists('years', $matches)) { // all years with publications
             $publicationManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
             $publicationManager->filter('inactive = 0');
 
@@ -120,7 +122,7 @@ class archiveController extends BaseController {
             API::output(
                 $issue->getExtendedOutput()
             );
-        } else if(array_key_exists('pub', $matches) && array_key_exists('year', $matches)) { // all issues by year
+        } else if(array_key_exists('pub', $matches) && array_key_exists('year', $matches)) { // all issues by year for a publication
             try {
                 $issueManager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
 
@@ -136,7 +138,7 @@ class archiveController extends BaseController {
 
                 $issueManager->join($publicationManager, null, 'publication');
 
-                $values = $issueManager->values();
+                $values = $paginatorWrapper->setManager($issueManager)->values();
             } catch(\Exception $e) {
                 throw new \NotFoundException(
                     $e->getMessage(),
@@ -153,7 +155,9 @@ class archiveController extends BaseController {
             }
 
             API::output(
-                $output
+                $output,
+                $paginatorWrapper->since(),
+                $paginatorWrapper->max()
             );
         } else if(array_key_exists('year', $matches)) { // all issues by year
             try {
@@ -170,7 +174,7 @@ class archiveController extends BaseController {
 
                 $issueManager->join($publicationManager, null, 'publication');
 
-                $values = $issueManager->values();
+                $values = $paginatorWrapper->setManager($issueManager)->values();
             } catch(\Exception $e) {
                 throw new \NotFoundException(
                     $e->getMessage(),
@@ -187,7 +191,9 @@ class archiveController extends BaseController {
             }
 
             API::output(
-                $output
+                $output,
+                $paginatorWrapper->since(),
+                $paginatorWrapper->max()
             );
         } else if(array_key_exists('pub', $matches) && array_key_exists('issue', $matches)) { // specific issue by issue no in specific publication
             try {
@@ -232,8 +238,8 @@ class archiveController extends BaseController {
                 $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchiveIssue', 'archive_issue');
                 $pubs = $manager->filter('publication = %i', array($matches['pub']))
                                  ->filter('inactive = 0')
-                                 ->order('date', 'DESC')
-                                 ->values();
+                                 ->order('date', 'DESC');
+                $pubs = $paginatorWrapper->setManager($manager)->values();
             } catch(\Exception $e) {
                 throw new \NotFoundException('No issues found for this publication.', $matches, 'API-ArchiveController');
             }
@@ -246,15 +252,17 @@ class archiveController extends BaseController {
             }
 
             API::output(
-                $output
+                $output,
+                $paginatorWrapper->since(),
+                $paginatorWrapper->max()
             );
         } else { // list of publications
             $output = array();
 
             try {
                 $manager = \FelixOnline\Core\BaseManager::build('FelixOnline\Core\ArchivePublication', 'archive_publication');
-                $pubs = $manager->filter('inactive = 0')
-                                 ->values();
+                $pubs = $manager->filter('inactive = 0');
+                $pubs = $paginatorWrapper->setManager($manager)->values();
 
                 foreach($pubs as $id => $pub) {
                     $output[] = (new PublicationHelper($pub))->getOutput();
@@ -264,7 +272,9 @@ class archiveController extends BaseController {
             }
 
             API::output(
-                $output
+                $output,
+                $paginatorWrapper->since(),
+                $paginatorWrapper->max()
             );
         }
     }
