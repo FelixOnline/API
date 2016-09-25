@@ -18,9 +18,11 @@ class CommentHelper extends BaseHelper {
 
         // reply
         if($output['reply']) {
-            $object = new CommentHelper($this->this->getReply());
-            $output['reply'] = $object->getOutput();
+            $output['reply'] = $output['reply']->getId();
         }
+
+        // number of replies
+        $output['numReplies'] = $this->this->getNumValidatedReplies();
 
         return $output;
     }

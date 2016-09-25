@@ -1,0 +1,28 @@
+<code>http://api.felixonline.co.uk/comments/article/:article_id</code>
+
+Returns comments on an article.
+
+The comments will only be returned if all of the following conditions are met:
+
+ * The article the comment relates to has been published
+ * The comment has not been moderated out
+ * The email address the comment is posted against has been validated
+
+Only root comments (i.e. those which are not replies of another) are returned, and comments are provided in date descending order.
+
+### Example call
+`http://api.felixonline.co.uk/comments/article/1234`
+
+### Example response
+    [
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object]
+    ]

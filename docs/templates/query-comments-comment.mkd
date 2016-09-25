@@ -1,0 +1,16 @@
+<code>http://api.felixonline.co.uk/comments/:id</code>
+
+Returns a specific comment object.
+
+The comment will only be returned if all of the following conditions are met:
+
+* The article the comment relates to has been published
+* The comment, and that of all the parents of this comment back to the root comment, has not been moderated out
+* The email address the comment, and that of all the parents of this comment back to the root comment, is posted against has been validated
+
+### Example call
+`http://api.felixonline.co.uk/comments/1234`
+
+### Example response
+    [comment_object]
+

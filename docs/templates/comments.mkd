@@ -10,9 +10,12 @@ Key             | Value                           | Returns
 `name`       | Commenter name                     | String
 `comment`       | The comment  | String
 `timestamp`    | Creation posix timestamp   | Int
-`reply` | Comment object this is a reply to OR null | Comment object (this)
+`reply` | ID of comment this is a reply to OR null | Int
+`numReplies` | Number of replies this comment has | Int
 `likes` | Number of likes | Int
 `dislikes` | Number of dislikes | Int
+
+numReplies only includes comments which are accessible, i.e. those which have not been moderated out, and those where the user's email address has been validated.
 
 ### Example object
 	{
@@ -20,7 +23,14 @@ Key             | Value                           | Returns
 		"comment":"blah blah blah",
 		"timestamp":1441648260,
 		"reply":null,
+		"numReplies":1,
 		"likes":"0",
 		"dislikes":"0",
 		"id":"1234"
 	}
+
+### Remarks
+
+Some sections are "secret" and can only be accessed from the Imperial College network.
+
+If the comment requested is for an article is in a "secret" section, it cannot be accessed.

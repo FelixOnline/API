@@ -17,9 +17,10 @@ Key         | Value                 | Returns
 `raw_content` | Article content (json) as output by Sir Trevor | String
 `image`     | Article image object. Returns null if no image. | [Image Object](#image)
 `url`       | Article url on Felix Online | String
-`comments`  | Array of comments on article | Array of [Comment Object](#comments)
 `comment_count` | Number of comments on article | Int
 `img_caption` | Caption for the image | String
+
+Previously, an array of comments was included in this object. To obtain comments, please now use the [Article Comments endpoint](#query-comments-article).
 
 ### Raw Content
 For advanced uses you may want to access this.
@@ -72,4 +73,4 @@ Finally, FelixImages contain an ID number for the image for fetching from the Im
 
 Some sections are "secret" and can only be accessed from the Imperial College network.
 
-If an article is in a "secret" section, it cannot be accessed.
+If an article is in a "secret" section, it cannot be accessed, nor can any comments allocated to it be accessed.

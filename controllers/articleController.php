@@ -108,7 +108,7 @@ class articleController extends BaseController {
                 $values = $paginatorWrapper->setManager($manager)->values();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
-                    $e->getMessage(),
+                    'No articles found.',
                     $matches,
                     'API-ArticleController'
                 );

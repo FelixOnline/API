@@ -1,0 +1,30 @@
+<code>http://api.felixonline.co.uk/comments/replies/:parent_id</code>
+
+Returns replies to a comment.
+
+The replies will only be returned if all of the following conditions are met:
+
+* The article the parent comment relates to has been published
+* The parent comment, the child comment, and that of all the parents of this comment back to the root comment, has not been moderated out
+* The email address the comment, the child comment, and that of all the parents of this comment back to the root comment, is posted against has been validated
+
+If a child comment fails any of the above tests, but the parent comment (and all of its parents back to the root comment) passes, then just the offending child commit will be omitted.
+
+Only the first tier of comments (i.e. those which are not a child of a child of the parent comment) are returned, and comments are provided in date ascending order. Note that this is the reverse order to that of article comments.
+
+### Example call
+`http://api.felixonline.co.uk/comments/replies/1234`
+
+### Example response
+    [
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object],
+        [comment_object]
+    ]

@@ -9,6 +9,7 @@ All API calls contain a field "error" which is 0 if the request was succesful, o
 ### Versioning
 
 You can check what version of the API is running on the server by going to the endpoint "/version", this will report in the format of:
+
     {
         version: 0.2,
         name: "Name API",
