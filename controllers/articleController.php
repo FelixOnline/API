@@ -6,7 +6,7 @@ namespace FelixOnline\API;
  */
 class articleController extends BaseController {
     function GET($matches) {
-        $paginatorWrapper = new \FelixOnline\API\PaginatorWrapper('published');
+        $paginatorWrapper = new \FelixOnline\API\PaginatorWrapper('id', 'article_publication');
 
         if(array_key_exists('id', $matches)) { // if specific article
             try {
@@ -47,8 +47,7 @@ class articleController extends BaseController {
 
             try {
                 $manager = (new \FelixOnline\Core\ArticleManager())
-                    ->filter('published < NOW()')
-                    ->order('published', 'DESC')
+                    ->enablePublishedFilter()
                     ->filter('category = %i', array($category->getId()));
 
                 $values = $paginatorWrapper->setManager($manager)->values();
@@ -76,8 +75,7 @@ class articleController extends BaseController {
                 $userManager->filter('author = "%s"', array($matches['user']));
 
                 $manager = (new \FelixOnline\Core\ArticleManager())
-                    ->filter('published < NOW()')
-                    ->order('published', 'DESC');
+                    ->enablePublishedFilter();
 
                 $manager->join($userManager, null, null, 'article');
 
@@ -105,13 +103,12 @@ class articleController extends BaseController {
 
             try {
                 $manager = (new \FelixOnline\Core\ArticleManager())
-                    ->filter('published < NOW()')
-                    ->order('published', 'DESC');
+                    ->enablePublishedFilter();
 
                 $values = $paginatorWrapper->setManager($manager)->values();
             } catch (\Exception $e) {
                 throw new \NotFoundException(
-                    'No articles found.',
+                    $e->getMessage(),
                     $matches,
                     'API-ArticleController'
                 );

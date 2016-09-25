@@ -2,8 +2,6 @@
 
 Returns the most recent articles published to Felix Online.
 
-There is a known limitation with the pagination approach for articles, which is described in the [Overview](#overview).
-
 ### Example response
     [
         [article_object],

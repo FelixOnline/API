@@ -2,8 +2,6 @@
 
 Returns the most recent articles published to a specific category.
 
-There is a known limitation with the pagination approach for articles, which is described in the [Overview](#overview).
-
 ### Example call
 `http://api.felixonline.co.uk/articles/news`
 

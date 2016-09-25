@@ -13,16 +13,23 @@ if(!defined('API_COPYRIGHT')): define('API_COPYRIGHT', '(c) Felix Online'); endi
 class PaginatorWrapper {
     private $manager = false;
     private $id;
+    private $table;
 
     private $since = false; // First
     private $max = false; // Last
 
-    public function __construct($id = 'id') { // set primary key
+    public function __construct($id = 'id', $table = false) { // set primary key
         $this->id = $id;
+
+        $this->table = $table;
     }
 
     public function setManager(\FelixOnline\Core\BaseManager $manager) {
         $this->manager = $manager;
+
+        if(!$this->table) {
+            $this->table = $manager->table;
+        }
 
         return($this);
     }
@@ -38,9 +45,9 @@ class PaginatorWrapper {
         }
 
         if(isset($_GET['after'])) { // Get records after this ID
-            $this->manager->filter($this->id.' > "%s"', array($_GET['after']));
+            $this->manager->filterOnSpecifiedTable($this->table, $this->id.' > "%s"', array($_GET['after']));
         } elseif(isset($_GET['before'])) { // Get records before this ID
-            $this->manager->filter($this->id.' < "%s"', array($_GET['before']));
+            $this->manager->filterOnSpecifiedTable($this->table, $this->id.' < "%s"', array($_GET['before']));
         }
 
         if(isset($_GET['limit'])) {
@@ -52,11 +59,40 @@ class PaginatorWrapper {
         $values = $this->manager->values();
 
         if($values) {
-            $one = end($values);
-            $one = $one->fields[$this->id]->getRawValue();
+            if(strstr($this->id, '.')) { // References a foreign key
+                $data = explode('.', $this->id);
 
-            $two = reset($values);
-            $two = $two->fields[$this->id]->getRawValue();
+                switch($data[0]) {
+                    case 'article_publication':
+                        $one = end($values);
+                        $one = $one->getId();
+
+                        $two = reset($values);
+                        $two = $two->getId();
+
+                        // Now get publication record ID
+                        $oneM = \FelixOnline\Core\BaseManager::build('\FelixOnline\Core\ArticlePublication', 'article_publication');
+                        $one = $oneM->filter('article = %i', array($one))
+                                    ->filter('republished = 0')
+                                    ->one();
+                        $one = $one->getId();
+
+                        $twoM = \FelixOnline\Core\BaseManager::build('\FelixOnline\Core\ArticlePublication', 'article_publication');
+                        $two = $twoM->filter('article = %i', array($two))
+                                    ->filter('republished = 0')
+                                    ->one();
+                        $two = $two->getId();
+                        break;
+                    default:
+                        throw new \FelixOnline\Exceptions\InternalException('This foreign key field is not supported as a cursor at present');
+                }
+            } else {
+                $one = end($values);
+                $one = $one->fields[$this->id]->getRawValue();
+
+                $two = reset($values);
+                $two = $two->fields[$this->id]->getRawValue();
+            }
 
             // The largest item goes as max
             if($one > $two) {
