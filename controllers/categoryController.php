@@ -54,8 +54,7 @@ class categoryController extends BaseController {
                     ->filter('hidden = 0')
                     ->filter('id > 0')
                     ->filter('secret = 0')
-                    ->filter('parent IS NULL')
-                    ->order('order', 'ASC');
+                    ->order('id', 'ASC');
 
                 $cats = $paginatorWrapper->setManager($cats)->values();
             } catch (\Exception $e) {
